@@ -338,13 +338,6 @@ public class Circuito {
 		try{
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();			
-			/**
-			String buscaStatus = "select * from circuito where circuitoNumero ='"+circuito+"'";
-			rs = conecta.stm.executeQuery(buscaStatus);
-			if(rs.next()){
-				statusA = rs.getString("statusA");
-				statusB = rs.getString("statusB");
-			}*/
 			
 			if((this.statusA=="s")&&(this.statusB=="sB")){
 			String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
@@ -473,13 +466,6 @@ public class Circuito {
 			try{
 				ConectaBanco conecta = new ConectaBanco();
 				conecta.conectaBanco();			
-				/**
-				String buscaStatus = "select * from circuito where circuitoNumero ='"+circuito+"' and cabeceira='"+cabeceira+"'";
-				rs = conecta.stm.executeQuery(buscaStatus);
-				if(rs.next()){
-					statusA = rs.getString("statusA");
-					statusB = rs.getString("statusB");
-				}*/
 				
 				if((this.statusA=="s")&&(this.statusB=="sB")){
 				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
