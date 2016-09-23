@@ -249,7 +249,10 @@ public class TelaCadastroCircuito extends JFrame {
 						panel_1.setVisible(true);
 						panel_2.setVisible(true);
 						panel_3.setVisible(false);
-						panel_4.setVisible(false);		
+						panel_4.setVisible(false);	
+						chckbxSdh.setSelected(true);
+						chckbxSdh_1.setSelected(true);
+						
 													
 							String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
 							RS = conecta.stm.executeQuery(buscaSDH);
@@ -317,6 +320,8 @@ public class TelaCadastroCircuito extends JFrame {
 						panel_4.setVisible(true);
 						panel_2.setVisible(false);
 						panel_3.setVisible(false);
+						chckbxSdh.setSelected(true);
+						chckbxPdh_1.setSelected(true);
 						
 						String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
 						RS = conecta.stm.executeQuery(buscaSDH);
@@ -374,6 +379,8 @@ public class TelaCadastroCircuito extends JFrame {
 						panel_4.setVisible(true);
 						panel_1.setVisible(false);
 						panel_2.setVisible(false);
+						chckbxPdh.setSelected(true);
+						chckbxPdh_1.setSelected(true);
 						
 						String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
 						RS = conecta.stm.executeQuery(buscaCidadeA);
@@ -401,8 +408,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							pdhB = RS.getString("modeloRadio");
-						}
-						
+						}						
 						
 						//Carrega dados ponta A PDH
 						textArea.setText(rs.getString("observacoesCircuito"));
@@ -416,14 +422,15 @@ public class TelaCadastroCircuito extends JFrame {
 						comboBoxCidadeB.setSelectedItem(cidadeB);
 						comboBoxPDHB.setSelectedItem(pdhB);
 						textFieldPortaPDHB.setText(rs.getString("portaB"));
-						textFieldDidPDHB.setText(rs.getString("didB"));		
-						
+						textFieldDidPDHB.setText(rs.getString("didB"));								
 						
 					}else if(("p".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
 						panel_3.setVisible(true);
 						panel_2.setVisible(true);
 						panel_1.setVisible(false);
 						panel_4.setVisible(false);
+						chckbxPdh.setSelected(true);
+						chckbxSdh_1.setSelected(true);
 						
 						String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
 						RS = conecta.stm.executeQuery(buscaCidadeA);
@@ -489,6 +496,7 @@ public class TelaCadastroCircuito extends JFrame {
 				else{
 					textFieldCircuito.setText(circuitoDesejado);
 					buttonSalvar.setEnabled(false);
+					buttonAtualizar.setEnabled(true);
 					ResultSet rs = null;
 					ResultSet RS = null;
 					String statusA = null;
@@ -516,7 +524,9 @@ public class TelaCadastroCircuito extends JFrame {
 							panel_1.setVisible(true);
 							panel_2.setVisible(true);
 							panel_3.setVisible(false);
-							panel_4.setVisible(false);		
+							panel_4.setVisible(false);	
+							chckbxSdh.setSelected(true);
+							chckbxSdh_1.setSelected(true);
 														
 								String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
 								RS = conecta.stm.executeQuery(buscaSDH);
@@ -558,8 +568,7 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									estacaoB = RS.getString("estacaoSigla");
-								}
-								
+								}								
 							
 							//Carregando dados da ponta A SDH
 							textFieldCliente.setText(rs.getString("cliente"));
@@ -570,8 +579,7 @@ public class TelaCadastroCircuito extends JFrame {
 							comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
 							textFieldDidSDHA.setText(rs.getString("didA"));	
 							comboBoxCidadeSDHA.setSelectedItem(cidadeA);
-							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
-							
+							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);							
 							
 							//Carregando dados da ponta B SDH
 							comboBoxSDHB.setSelectedItem(sdhB);
@@ -587,6 +595,8 @@ public class TelaCadastroCircuito extends JFrame {
 							panel_4.setVisible(true);
 							panel_2.setVisible(false);
 							panel_3.setVisible(false);
+							chckbxSdh.setSelected(true);
+							chckbxPdh_1.setSelected(true);
 							
 							String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
 							RS = conecta.stm.executeQuery(buscaSDH);
@@ -645,6 +655,8 @@ public class TelaCadastroCircuito extends JFrame {
 							panel_4.setVisible(true);
 							panel_1.setVisible(false);
 							panel_2.setVisible(false);
+							chckbxPdh.setSelected(true);
+							chckbxPdh_1.setSelected(true);
 							
 							String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
 							RS = conecta.stm.executeQuery(buscaCidadeA);
@@ -672,8 +684,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								pdhB = RS.getString("modeloRadio");
-							}
-							
+							}							
 							
 							//Carrega dados ponta A PDH
 							textArea.setText(rs.getString("observacoesCircuito"));
@@ -696,6 +707,8 @@ public class TelaCadastroCircuito extends JFrame {
 							panel_2.setVisible(true);
 							panel_1.setVisible(false);
 							panel_4.setVisible(false);
+							chckbxPdh.setSelected(true);
+							chckbxSdh_1.setSelected(true);
 							
 							String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
 							RS = conecta.stm.executeQuery(buscaCidadeA);
@@ -1624,6 +1637,285 @@ public class TelaCadastroCircuito extends JFrame {
 		contentPane.add(buttonSalvar);
 		
 		buttonAtualizar = new JButton("");
+		buttonAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Circuito novoCircuito = new Circuito();
+				ResultSet rs = null;
+				int valorSlotA = 0;
+				int valorSlotB = 0;
+				int indiceCidadeA = 0;
+				int indiceCidadeB = 0;
+				String numeroCircuito = textFieldCircuito.getText();
+				String nomeCabeceira = (String)comboBoxCabeceira.getSelectedItem();
+				
+				if((chckbxSdh.isSelected())&&(chckbxSdh_1.isSelected())){
+					
+							try{
+								ConectaBanco conecta = new ConectaBanco();
+								conecta.conectaBanco();
+								
+								String indiceSDHA = "select * from sdh where sdhNome='"+comboBoxSDHA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(indiceSDHA);
+								
+								while(rs.next()){
+									indexSDHA = rs.getInt("idsdh");
+								}
+								
+								String indiceSDHB = "select * from sdh where sdhNome='"+comboBoxSDHB.getSelectedItem()+"'"; 
+								rs = conecta.stm.executeQuery(indiceSDHB);
+								
+								while(rs.next()){
+									indexSDHB = rs.getInt("idsdh");
+								}
+								
+								String buscaIndice = "select * from cidade where cidadeNome='"+comboBoxCidadeSDHA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(buscaIndice);
+								
+								while(rs.next()){
+									indiceCidadeA = rs.getInt("idcidade");
+								}
+								
+								String buscaIndiceB = "select * from cidade where cidadeNome='"+comboBoxCidadeSDHB.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(buscaIndiceB);
+								
+								while(rs.next()){
+									indiceCidadeB = rs.getInt("idcidade");
+								}
+								
+								String indiceEstacaoA = "select * from estacao where estacaoSigla='"+comboBoxEstacaoSDHA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(indiceEstacaoA);
+								
+								while(rs.next()){
+									indexEstacaoA = rs.getInt("idEstacao");
+								}
+								
+								String indiceEstacaoB = "select * from estacao where estacaoSigla='"+comboBoxEstacaoSDHB.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(indiceEstacaoB);
+								
+								while(rs.next()){
+									indexEstacaoB = rs.getInt("idEstacao");
+								}									
+								
+							}catch(SQLException e){
+								JOptionPane.showMessageDialog(null, e);
+							}
+						novoCircuito.setCliente(textFieldCliente.getText().toUpperCase());
+						novoCircuito.setNumeroCircuito(textFieldCircuito.getText());
+						novoCircuito.setObervacoes(textArea.getText());
+						novoCircuito.setEquipamentoSDHA(indexSDHA);
+						novoCircuito.setSlotA(textFieldSlotSDHA.getText());
+						novoCircuito.setPortaA((String)comboBoxPortaSDHA.getSelectedItem());
+						novoCircuito.setDidA(textFieldDidSDHA.getText());
+						novoCircuito.setEquipamentoSDHB(indexSDHB);
+						novoCircuito.setSlotB(textFieldSlotSDHB.getText());
+						novoCircuito.setPortaB((String)comboBoxPortaSDHB.getSelectedItem());
+						novoCircuito.setDidB(textFieldDidSDHB.getText());
+						novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+						novoCircuito.setStatusA("s");
+						novoCircuito.setStatusB("sB");
+						novoCircuito.setCidadeA(indiceCidadeA);
+						novoCircuito.setCidadeB(indiceCidadeB);
+						novoCircuito.setEstacaoA(indexEstacaoA);
+						novoCircuito.setEstacaoB(indexEstacaoB);							
+						novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
+						textFieldCircuito.setText("");
+						textFieldCliente.setText("");
+						textArea.setText("");
+						textFieldSlotSDHA.setText("");
+						textFieldSlotSDHB.setText("");
+						textFieldDidSDHA.setText("");
+						textFieldDidSDHB.setText("");
+					    buttonSalvar.setEnabled(true);
+					    buttonAtualizar.setEnabled(false);
+				
+			}//Fim da lógica de verificação e inserção dos dados para SDH nas duas pontas
+			//Início da lógica Para Inserção de Dados para SDH na ponta A e PDH na ponta B
+			if((chckbxSdh.isSelected())&&(chckbxPdh_1.isSelected())){
+							
+							try{
+								ConectaBanco conecta = new ConectaBanco();
+								conecta.conectaBanco();
+								
+								String buscaIndice = "select * from cidade where cidadeNome='"+comboBoxCidadeB.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(buscaIndice);
+								
+								while(rs.next()){
+									indiceCidadeB = rs.getInt("idcidade");
+								}
+								
+								String indiceSDHA = "select * from sdh where sdhNome='"+comboBoxSDHA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(indiceSDHA);
+								
+								while(rs.next()){
+									indexSDHA = rs.getInt("idsdh");
+								}
+								
+								String buscaIndex = "select * from cidade where cidadeNome='"+comboBoxCidadeSDHA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(buscaIndex);
+								
+								while(rs.next()){
+									indiceCidadeA = rs.getInt("idcidade");
+								}
+								
+								String indiceEstacaoA = "select * from estacao where estacaoSigla='"+comboBoxEstacaoSDHA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(indiceEstacaoA);
+								
+								while(rs.next()){
+									indexEstacaoA = rs.getInt("idEstacao");
+								}
+								
+							}catch(SQLException e){
+								JOptionPane.showMessageDialog(null, e);
+							}
+							novoCircuito.setCliente(textFieldCliente.getText().toUpperCase());
+							novoCircuito.setNumeroCircuito(textFieldCircuito.getText());
+							novoCircuito.setObervacoes(textArea.getText());
+							novoCircuito.setEquipamentoSDHA(indexSDHA);
+							novoCircuito.setSlotA(textFieldSlotSDHA.getText());
+							novoCircuito.setPortaA((String)comboBoxPortaSDHA.getSelectedItem());
+							novoCircuito.setDidA(textFieldDidSDHA.getText());
+							novoCircuito.setCidadeB(indiceCidadeB);
+							novoCircuito.setEquipamentoPDHB(comboBoxPDHB.getSelectedIndex());
+							novoCircuito.setPortaB(textFieldPortaPDHB.getText());
+							novoCircuito.setDidB(textFieldDidPDHB.getText());
+							novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+							novoCircuito.setStatusA("s");
+							novoCircuito.setStatusB("pB");
+							novoCircuito.setCidadeA(indiceCidadeA);
+							novoCircuito.setEstacaoA(indexEstacaoA);
+							novoCircuito.setEstacaoB(1);
+							novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
+							textFieldCircuito.setText("");
+							textFieldCliente.setText("");
+							textArea.setText("");
+							textFieldSlotSDHA.setText("");
+							textFieldDidSDHA.setText("");
+							textFieldPortaPDHB.setText("");
+							textFieldDidPDHB.setText("");	
+							buttonSalvar.setEnabled(true);
+						    buttonAtualizar.setEnabled(false);
+													
+										
+			}//Fim da lógica de verificação e inserção dos dados para SDH na ponta A e PDH na ponta B
+			//Início da Lógica de verificação e inserção dos dados para PDH na ponta A e SDH na ponta B
+			if((chckbxPdh.isSelected())&&(chckbxSdh_1.isSelected())){
+
+							try{
+								ConectaBanco conecta = new ConectaBanco();
+								conecta.conectaBanco();
+								
+								String buscaIndice = "select * from cidade where cidadeNome='"+comboBoxCidadeA.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(buscaIndice);
+								
+								while(rs.next()){
+									indiceCidadeA = rs.getInt("idcidade");
+								}
+								
+								String indiceSDHB = "select * from sdh where sdhNome='"+comboBoxSDHB.getSelectedItem()+"'"; 
+								rs = conecta.stm.executeQuery(indiceSDHB);
+								
+								while(rs.next()){
+									indexSDHB = rs.getInt("idsdh");
+								}
+								
+								String buscaIndiceB = "select * from cidade where cidadeNome='"+comboBoxCidadeSDHB.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(buscaIndiceB);
+								
+								while(rs.next()){
+									indiceCidadeB = rs.getInt("idcidade");
+								}
+								
+								String indiceEstacaoB = "select * from estacao where estacaoSigla='"+comboBoxEstacaoSDHB.getSelectedItem()+"'";
+								rs = conecta.stm.executeQuery(indiceEstacaoB);
+								
+								while(rs.next()){
+									indexEstacaoB = rs.getInt("idEstacao");
+								}
+								
+							}catch(SQLException e){
+								JOptionPane.showMessageDialog(null, e);
+							}
+							novoCircuito.setCliente(textFieldCliente.getText().toUpperCase());
+							novoCircuito.setNumeroCircuito(textFieldCircuito.getText());
+							novoCircuito.setObervacoes(textArea.getText());
+							novoCircuito.setCidadeA(indiceCidadeA);
+							novoCircuito.setEquipamentoPDHA(comboBoxPDHA.getSelectedIndex()+1);
+							novoCircuito.setPortaA(textFieldPortaPDHA.getText());
+							novoCircuito.setDidA(textFieldDidPDHA.getText());
+							novoCircuito.setEquipamentoSDHB(indexSDHB);
+							novoCircuito.setSlotB(textFieldSlotSDHB.getText());
+							novoCircuito.setPortaB((String)comboBoxPortaSDHB.getSelectedItem());
+							novoCircuito.setDidB(textFieldDidSDHB.getText());
+							novoCircuito.setStatusA("p");
+							novoCircuito.setStatusB("sB");
+							novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+							novoCircuito.setCidadeB(indiceCidadeB);
+							novoCircuito.setEstacaoB(indexEstacaoB);
+							novoCircuito.setEstacaoA(1);
+							novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
+							textFieldCircuito.setText("");
+							textFieldCliente.setText("");
+							textArea.setText("");
+							textFieldPortaPDHA.setText("");
+							textFieldDidPDHA.setText("");		
+							buttonSalvar.setEnabled(true);
+						    buttonAtualizar.setEnabled(false);
+										
+				
+			}//Fim da Lógica de verificação e inserção dos dados para PDH na ponta A e SDH na ponta B
+			//Início da Lógica de verificação e inserção de dados para PDH nas duas pontas
+			if((chckbxPdh.isSelected())&&(chckbxPdh_1.isSelected())){
+					
+					try{
+						ConectaBanco conecta = new ConectaBanco();
+						conecta.conectaBanco();
+						
+						String indexCidadeA = "select * from cidade where cidadeNome='"+comboBoxCidadeA.getSelectedItem()+"'";
+						rs = conecta.stm.executeQuery(indexCidadeA);
+						while(rs.next()){
+							indiceCidadeA = rs.getInt("idcidade");
+						}
+						
+						String indexCidadeB = "select * from cidade where cidadeNome='"+comboBoxCidadeB.getSelectedItem()+"'";
+						rs = conecta.stm.executeQuery(indexCidadeB);
+						
+						while(rs.next()){
+							indiceCidadeB = rs.getInt("idcidade");
+						}
+						novoCircuito.setCliente(textFieldCliente.getText().toUpperCase());
+						novoCircuito.setNumeroCircuito(textFieldCircuito.getText());
+						novoCircuito.setObervacoes(textArea.getText());
+						novoCircuito.setCidadeA(indiceCidadeA);
+						novoCircuito.setEquipamentoPDHA(comboBoxPDHA.getSelectedIndex()+1);
+						novoCircuito.setPortaA(textFieldPortaPDHA.getText());
+						novoCircuito.setDidA(textFieldDidPDHA.getText());
+						novoCircuito.setCidadeB(indiceCidadeB);
+						novoCircuito.setEquipamentoPDHB(comboBoxPDHB.getSelectedIndex());
+						novoCircuito.setPortaB(textFieldPortaPDHB.getText());
+						novoCircuito.setDidB(textFieldDidPDHB.getText());
+						novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+						novoCircuito.setStatusA("p");
+						novoCircuito.setStatusB("pB");
+						novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
+						textFieldCircuito.setText("");
+						textFieldCliente.setText("");
+						textArea.setText("");
+						textFieldDidPDHA.setText("");
+						textFieldDidPDHB.setText("");
+						textFieldPortaPDHA.setText("");
+						textFieldPortaPDHB.setText("");
+						buttonSalvar.setEnabled(true);
+					    buttonAtualizar.setEnabled(false);
+						
+					}catch(SQLException e){
+						JOptionPane.showMessageDialog(null, e);
+					}						
+									
+			}//Fim da Lógica de verificação e inserção de dados para PDH nas duas pontas
+			
+		}
+				
+		});
 		buttonAtualizar.setToolTipText("Atualizar");
 		buttonAtualizar.setIcon(new ImageIcon(TelaCadastroCircuito.class.getResource("/imagens/mltech/1248318776 (Copy).png")));
 		buttonAtualizar.setBounds(84, 0, 45, 31);

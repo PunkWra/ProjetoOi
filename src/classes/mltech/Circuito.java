@@ -328,6 +328,285 @@ public class Circuito {
 		
 	}//Fim do método de inserir circuito
 	
+	
+	public void atualizaCircuito(String circuito,String cabeceira){
+		
+		ResultSet rs = null;
+		
+		if(cabeceira==null){
+		
+		try{
+			ConectaBanco conecta = new ConectaBanco();
+			conecta.conectaBanco();			
+			/**
+			String buscaStatus = "select * from circuito where circuitoNumero ='"+circuito+"'";
+			rs = conecta.stm.executeQuery(buscaStatus);
+			if(rs.next()){
+				statusA = rs.getString("statusA");
+				statusB = rs.getString("statusB");
+			}*/
+			
+			if((this.statusA=="s")&&(this.statusB=="sB")){
+			String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+			PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+			stm.setString(1, this.numeroCircuito);
+			stm.setInt(2, this.equipamentoSDHA);
+			stm.setInt(3, this.equipamentoSDHB);
+			stm.setInt(4, 1);
+			stm.setInt(5, 1);
+			stm.setInt(6, this.cidadeA);
+			stm.setInt(7, this.cidadeB);
+			stm.setString(8, this.slotA);
+			stm.setString(9, this.slotB);
+			stm.setString(10, this.portaA);
+			stm.setString(11, this.portaB);
+			stm.setString(12, this.didA);
+			stm.setString(13, this.didB);
+			stm.setString(14, this.obervacoes);
+			stm.setString(15, this.statusA);
+			stm.setString(16, this.statusB);
+			stm.setString(17, this.cliente);
+			stm.setString(18, this.cabeceira);
+			stm.setInt(19, this.estacaoA);
+			stm.setInt(20, this.estacaoB);
+			
+			stm.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
+			stm.close();
+			conecta.con.close();			
+			}else if((this.statusA=="p")&&(this.statusB=="pB")){
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+				stm.setString(1, this.numeroCircuito);
+				stm.setInt(2, 1);
+				stm.setInt(3, 1);
+				stm.setInt(4, this.equipamentoPDHA);
+				stm.setInt(5, this.equipamentoPDHB);
+				stm.setInt(6, this.cidadeA);
+				stm.setInt(7, this.cidadeB);
+				stm.setString(8, null);
+				stm.setString(9, null);
+				stm.setString(10, this.portaA);
+				stm.setString(11, this.portaB);
+				stm.setString(12, this.didA);
+				stm.setString(13, this.didB);
+				stm.setString(14, this.obervacoes);
+				stm.setString(15, this.statusA);
+				stm.setString(16, this.statusB);
+				stm.setString(17, this.cliente);
+				stm.setString(18, this.cabeceira);
+				stm.setInt(19, this.estacaoA);
+				stm.setInt(20, this.estacaoB);
+				
+				stm.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
+				stm.close();
+				conecta.con.close();
+			}else if((this.statusA=="p")&&(this.statusB=="sB")){
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+				stm.setString(1, this.numeroCircuito);
+				stm.setInt(2, 1);
+				stm.setInt(3, this.equipamentoSDHB);
+				stm.setInt(4, this.equipamentoPDHA);
+				stm.setInt(5, 1);
+				stm.setInt(6, this.cidadeA);
+				stm.setInt(7, this.cidadeB);
+				stm.setString(8, null);
+				stm.setString(9, this.slotB);
+				stm.setString(10, this.portaA);
+				stm.setString(11, this.portaB);
+				stm.setString(12, this.didA);
+				stm.setString(13, this.didB);
+				stm.setString(14, this.obervacoes);
+				stm.setString(15, this.statusA);
+				stm.setString(16, this.statusB);
+				stm.setString(17, this.cliente);
+				stm.setString(18, this.cabeceira);
+				stm.setInt(19, this.estacaoA);
+				stm.setInt(20, this.estacaoB);
+				
+				stm.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
+				stm.close();
+				conecta.con.close();
+				
+			}else if((this.statusA=="s")&&(this.statusB=="pB")){
+				
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+				stm.setString(1, this.numeroCircuito);
+				stm.setInt(2, this.equipamentoSDHA);
+				stm.setInt(3, 1);
+				stm.setInt(4, 1);
+				stm.setInt(5, this.equipamentoPDHB);
+				stm.setInt(6, this.cidadeA);
+				stm.setInt(7, this.cidadeB);
+				stm.setString(8, this.slotA);
+				stm.setString(9, null);
+				stm.setString(10, this.portaA);
+				stm.setString(11, this.portaB);
+				stm.setString(12, this.didA);
+				stm.setString(13, this.didB);
+				stm.setString(14, this.obervacoes);
+				stm.setString(15, this.statusA);
+				stm.setString(16, this.statusB);
+				stm.setString(17, this.cliente);
+				stm.setString(18, this.cabeceira);
+				stm.setInt(19, this.estacaoA);
+				stm.setInt(20, this.estacaoB);
+				
+				stm.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
+				stm.close();
+				conecta.con.close();
+			}
+			
+			
+		}catch(SQLException ev){
+			JOptionPane.showMessageDialog(null, ev);
+		}
+		}//Fim do método caso cabeceira seja nulo
+		else{
+			
+			try{
+				ConectaBanco conecta = new ConectaBanco();
+				conecta.conectaBanco();			
+				/**
+				String buscaStatus = "select * from circuito where circuitoNumero ='"+circuito+"' and cabeceira='"+cabeceira+"'";
+				rs = conecta.stm.executeQuery(buscaStatus);
+				if(rs.next()){
+					statusA = rs.getString("statusA");
+					statusB = rs.getString("statusB");
+				}*/
+				
+				if((this.statusA=="s")&&(this.statusB=="sB")){
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+				stm.setString(1, this.numeroCircuito);
+				stm.setInt(2, this.equipamentoSDHA);
+				stm.setInt(3, this.equipamentoSDHB);
+				stm.setInt(4, 1);
+				stm.setInt(5, 1);
+				stm.setInt(6, this.cidadeA);
+				stm.setInt(7, this.cidadeB);
+				stm.setString(8, this.slotA);
+				stm.setString(9, this.slotB);
+				stm.setString(10, this.portaA);
+				stm.setString(11, this.portaB);
+				stm.setString(12, this.didA);
+				stm.setString(13, this.didB);
+				stm.setString(14, this.obervacoes);
+				stm.setString(15, this.statusA);
+				stm.setString(16, this.statusB);
+				stm.setString(17, this.cliente);
+				stm.setString(18, this.cabeceira);
+				stm.setInt(19, this.estacaoA);
+				stm.setInt(20, this.estacaoB);
+				
+				stm.executeUpdate();
+				
+				JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
+				stm.close();
+				conecta.con.close();			
+				}else if((this.statusA=="p")&&(this.statusB=="pB")){
+					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+					PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+					stm.setString(1, this.numeroCircuito);
+					stm.setInt(2, 1);
+					stm.setInt(3, 1);
+					stm.setInt(4, this.equipamentoPDHA);
+					stm.setInt(5, this.equipamentoPDHB);
+					stm.setInt(6, this.cidadeA);
+					stm.setInt(7, this.cidadeB);
+					stm.setString(8, null);
+					stm.setString(9, null);
+					stm.setString(10, this.portaA);
+					stm.setString(11, this.portaB);
+					stm.setString(12, this.didA);
+					stm.setString(13, this.didB);
+					stm.setString(14, this.obervacoes);
+					stm.setString(15, this.statusA);
+					stm.setString(16, this.statusB);
+					stm.setString(17, this.cliente);
+					stm.setString(18, this.cabeceira);
+					stm.setInt(19, this.estacaoA);
+					stm.setInt(20, this.estacaoB);
+					
+					stm.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
+					stm.close();
+					conecta.con.close();
+				}else if((this.statusA=="p")&&(this.statusB=="sB")){
+					
+					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+					PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+					stm.setString(1, this.numeroCircuito);
+					stm.setInt(2, 1);
+					stm.setInt(3, this.equipamentoSDHB);
+					stm.setInt(4, this.equipamentoPDHA);
+					stm.setInt(5, 1);
+					stm.setInt(6, this.cidadeA);
+					stm.setInt(7, this.cidadeB);
+					stm.setString(8, null);
+					stm.setString(9, this.slotB);
+					stm.setString(10, this.portaA);
+					stm.setString(11, this.portaB);
+					stm.setString(12, this.didA);
+					stm.setString(13, this.didB);
+					stm.setString(14, this.obervacoes);
+					stm.setString(15, this.statusA);
+					stm.setString(16, this.statusB);
+					stm.setString(17, this.cliente);
+					stm.setString(18, this.cabeceira);
+					stm.setInt(19, this.estacaoA);
+					stm.setInt(20, this.estacaoB);
+					
+					stm.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
+					stm.close();
+					conecta.con.close();
+					
+				}else if((this.statusA=="s")&&(this.statusB=="pB")){
+					
+					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+					PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
+					stm.setString(1, this.numeroCircuito);
+					stm.setInt(2, this.equipamentoSDHA);
+					stm.setInt(3, 1);
+					stm.setInt(4, 1);
+					stm.setInt(5, this.equipamentoPDHB);
+					stm.setInt(6, this.cidadeA);
+					stm.setInt(7, this.cidadeB);
+					stm.setString(8, this.slotA);
+					stm.setString(9, null);
+					stm.setString(10, this.portaA);
+					stm.setString(11, this.portaB);
+					stm.setString(12, this.didA);
+					stm.setString(13, this.didB);
+					stm.setString(14, this.obervacoes);
+					stm.setString(15, this.statusA);
+					stm.setString(16, this.statusB);
+					stm.setString(17, this.cliente);
+					stm.setString(18, this.cabeceira);
+					stm.setInt(19, this.estacaoA);
+					stm.setInt(20, this.estacaoB);
+					
+					stm.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
+					stm.close();
+					conecta.con.close();
+				}				
+				
+			}catch(SQLException ev){
+				JOptionPane.showMessageDialog(null, ev);
+			}			
+			
+		}		
+		
+	}//Fim do método de atualizar circuito
+	
 	public boolean verificaCircuito(String circuito){
 		
 		boolean retorno = false;
