@@ -176,8 +176,7 @@ public class TelaCadastroCircuito extends JFrame {
 			
 		}catch(SQLException e){
 			
-		}
-		
+		}		
 		
 	}//Fim do método de buscar cidade
 	

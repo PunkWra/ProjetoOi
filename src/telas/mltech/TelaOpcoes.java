@@ -23,6 +23,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import java.awt.Font;
 
 public class TelaOpcoes extends JFrame {
 
@@ -62,6 +63,12 @@ public class TelaOpcoes extends JFrame {
 		mnArquivo.add(mnNovo);
 		
 		JMenuItem mntmCircuito = new JMenuItem("Circuito");
+		mntmCircuito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroCircuito novoCircuito = new TelaCadastroCircuito();
+				novoCircuito.setVisible(true);
+			}
+		});
 		mnNovo.add(mntmCircuito);
 		JMenuItem mntmPlacamdulo = new JMenuItem("Placa/M\u00F3dulo");
 		mntmPlacamdulo.addMouseListener(new MouseAdapter() {
@@ -73,51 +80,54 @@ public class TelaOpcoes extends JFrame {
 		});
 		mnNovo.add(mntmPlacamdulo);
 		
-		JMenuItem mntmSalvar = new JMenuItem("Salvar");
-		mnArquivo.add(mntmSalvar);
-		
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mnArquivo.add(mntmSair);
 		
 		JMenu mnEditar = new JMenu("Editar");
 		menuBar.add(mnEditar);
 		
 		JMenuItem mntmCircuito_1 = new JMenuItem("Circuito");
+		mntmCircuito_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroCircuito novoCircuito = new TelaCadastroCircuito();
+				novoCircuito.setVisible(true);
+			}
+		});
 		mnEditar.add(mntmCircuito_1);
 		
 		JMenuItem mntmPlacamdulo_1 = new JMenuItem("Placa/M\u00F3dulo");
+		mntmPlacamdulo_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPlaca alteraPlaca = new TelaPlaca();
+				alteraPlaca.setVisible(true);
+			}
+		});
 		mnEditar.add(mntmPlacamdulo_1);
 		
 		JMenu mnSobre = new JMenu("Sobre");
 		menuBar.add(mnSobre);
 		
 		JMenuItem mntmSobre = new JMenuItem("Sobre");
+		mntmSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaSobre novoSobre = new TelaSobre();
+				novoSobre.setVisible(true);
+			}
+		});
 		mnSobre.add(mntmSobre);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton button = new JButton("");
-		button.setToolTipText("Novo");
-		button.setIcon(new ImageIcon(TelaOpcoes.class.getResource("/imagens/mltech/Novo.png")));
-		button.setBounds(0, 0, 48, 42);
-		contentPane.add(button);
-		
-		JButton button_1 = new JButton("");
-		button_1.setToolTipText("Pesquisar");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		button_1.setIcon(new ImageIcon(TelaOpcoes.class.getResource("/imagens/mltech/Pesquisar.png")));
-		button_1.setBounds(42, 0, 48, 42);
-		contentPane.add(button_1);
-		
-		JButton button_2 = new JButton("");
-		button_2.setToolTipText("Sair");
-		button_2.setIcon(new ImageIcon(TelaOpcoes.class.getResource("/imagens/mltech/Sair.png")));
-		button_2.setBounds(90, 0, 48, 42);
-		contentPane.add(button_2);
+		JLabel lblSccpSistema = new JLabel("SCCM - Sistema de Controle de Circuitos e M\u00F3dulos");
+		lblSccpSistema.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblSccpSistema.setBounds(77, 155, 451, 34);
+		contentPane.add(lblSccpSistema);
 	}
 }
