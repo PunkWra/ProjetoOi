@@ -29,8 +29,17 @@ public class Circuito {
 	private String didB;
 	private String cliente;
 	private String cabeceira;
+	private String statusCircuito;
 	
 		
+	public String getStatusCircuito() {
+		return statusCircuito;
+	}
+
+	public void setStatusCircuito(String statusCircuito) {
+		this.statusCircuito = statusCircuito;
+	}
+
 	public int getEstacaoA() {
 		return estacaoA;
 	}
@@ -205,7 +214,7 @@ public class Circuito {
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();
 			if((this.statusA=="s")&&(this.statusB=="sB")){
-			String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB,statusCircuito) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement stm = conecta.con.prepareStatement(insereCircuito);
 			stm.setString(1, this.numeroCircuito);
 			stm.setInt(2, this.equipamentoSDHA);
@@ -227,6 +236,7 @@ public class Circuito {
 			stm.setString(18, this.cabeceira);
 			stm.setInt(19, this.estacaoA);
 			stm.setInt(20, this.estacaoB);
+			stm.setString(21,  this.statusCircuito);
 			
 			stm.executeUpdate();
 			
@@ -234,7 +244,7 @@ public class Circuito {
 			stm.close();
 			conecta.con.close();			
 			}else if((this.statusA=="p")&&(this.statusB=="pB")){
-				String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB,statusCircuito) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement stm = conecta.con.prepareStatement(insereCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, 1);
@@ -256,13 +266,14 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
 				stm.close();
 				conecta.con.close();
 			}else if((this.statusA=="p")&&(this.statusB=="sB")){
-				String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB,statusCircuito) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement stm = conecta.con.prepareStatement(insereCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, 1);
@@ -284,6 +295,7 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
@@ -292,7 +304,7 @@ public class Circuito {
 				
 			}else if((this.statusA=="s")&&(this.statusB=="pB")){
 				
-				String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String insereCircuito = "insert into circuito (circuitoNumero,codSdhA,codSdhB,codPdhA,codPdhB,codCidadeA,codCidadeB,slotA,slotB,portaA,portaB,didA,didB,observacoesCircuito,statusA,statusB,cliente,cabeceira,codEstacaoA,codEstacaoB,statusCircuito) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement stm = conecta.con.prepareStatement(insereCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, this.equipamentoSDHA);
@@ -314,6 +326,7 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
@@ -340,7 +353,7 @@ public class Circuito {
 			conecta.conectaBanco();			
 			
 			if((this.statusA=="s")&&(this.statusB=="sB")){
-			String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+			String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"'";
 			PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 			stm.setString(1, this.numeroCircuito);
 			stm.setInt(2, this.equipamentoSDHA);
@@ -362,6 +375,7 @@ public class Circuito {
 			stm.setString(18, this.cabeceira);
 			stm.setInt(19, this.estacaoA);
 			stm.setInt(20, this.estacaoB);
+			stm.setString(21,  this.statusCircuito);
 			
 			stm.executeUpdate();
 			
@@ -369,7 +383,7 @@ public class Circuito {
 			stm.close();
 			conecta.con.close();			
 			}else if((this.statusA=="p")&&(this.statusB=="pB")){
-				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"'";
 				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, 1);
@@ -391,13 +405,14 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
 				stm.close();
 				conecta.con.close();
 			}else if((this.statusA=="p")&&(this.statusB=="sB")){
-				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"'";
 				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, 1);
@@ -419,6 +434,7 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
@@ -427,7 +443,7 @@ public class Circuito {
 				
 			}else if((this.statusA=="s")&&(this.statusB=="pB")){
 				
-				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"'";
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"'";
 				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, this.equipamentoSDHA);
@@ -449,6 +465,7 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Circuito Cadastrado Com Sucesso");
@@ -468,7 +485,7 @@ public class Circuito {
 				conecta.conectaBanco();			
 				
 				if((this.statusA=="s")&&(this.statusB=="sB")){
-				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+				String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
 				PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 				stm.setString(1, this.numeroCircuito);
 				stm.setInt(2, this.equipamentoSDHA);
@@ -490,6 +507,7 @@ public class Circuito {
 				stm.setString(18, this.cabeceira);
 				stm.setInt(19, this.estacaoA);
 				stm.setInt(20, this.estacaoB);
+				stm.setString(21,  this.statusCircuito);
 				
 				stm.executeUpdate();
 				
@@ -497,7 +515,7 @@ public class Circuito {
 				stm.close();
 				conecta.con.close();			
 				}else if((this.statusA=="p")&&(this.statusB=="pB")){
-					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
 					PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 					stm.setString(1, this.numeroCircuito);
 					stm.setInt(2, 1);
@@ -519,6 +537,7 @@ public class Circuito {
 					stm.setString(18, this.cabeceira);
 					stm.setInt(19, this.estacaoA);
 					stm.setInt(20, this.estacaoB);
+					stm.setString(21,  this.statusCircuito);
 					
 					stm.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
@@ -526,7 +545,7 @@ public class Circuito {
 					conecta.con.close();
 				}else if((this.statusA=="p")&&(this.statusB=="sB")){
 					
-					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
 					PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 					stm.setString(1, this.numeroCircuito);
 					stm.setInt(2, 1);
@@ -548,6 +567,7 @@ public class Circuito {
 					stm.setString(18, this.cabeceira);
 					stm.setInt(19, this.estacaoA);
 					stm.setInt(20, this.estacaoB);
+					stm.setString(21,  this.statusCircuito);
 					
 					stm.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");
@@ -556,7 +576,7 @@ public class Circuito {
 					
 				}else if((this.statusA=="s")&&(this.statusB=="pB")){
 					
-					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
+					String atualizaCircuito = "update circuito set circuitoNumero=?,codSdhA=?,codSdhB=?,codPdhA=?,codPdhB=?,codCidadeA=?,codCidadeB=?,slotA=?,slotB=?,portaA=?,portaB=?,didA=?,didB=?,observacoesCircuito=?,statusA=?,statusB=?,cliente=?,cabeceira=?,codEstacaoA=?,codEstacaoB=?, statusCircuito=? where circuitoNumero='"+circuito+"' and cabeceira='"+cabeceira+"'";
 					PreparedStatement stm = conecta.con.prepareStatement(atualizaCircuito);
 					stm.setString(1, this.numeroCircuito);
 					stm.setInt(2, this.equipamentoSDHA);
@@ -578,6 +598,7 @@ public class Circuito {
 					stm.setString(18, this.cabeceira);
 					stm.setInt(19, this.estacaoA);
 					stm.setInt(20, this.estacaoB);
+					stm.setString(21,  this.statusCircuito);
 					
 					stm.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Circuito Atualizado Com Sucesso");

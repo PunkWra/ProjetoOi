@@ -35,6 +35,7 @@ import java.sql.SQLException;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JRadioButton;
 
 public class TelaCadastroCircuito extends JFrame {
 
@@ -95,6 +96,8 @@ public class TelaCadastroCircuito extends JFrame {
 	private JComboBox comboBoxCidadeSDHB;
 	private JLabel lblEstao_1;
 	private JComboBox comboBoxEstacaoSDHB;
+	private JRadioButton rdbtnAtivo;
+	private JRadioButton rdbtnDesativado;
 
 	/**
 	 * Launch the application.
@@ -903,6 +906,20 @@ public class TelaCadastroCircuito extends JFrame {
 		comboBoxCabeceira.setBounds(149, 70, 88, 20);
 		panel.add(comboBoxCabeceira);
 		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_5.setBounds(136, 122, 126, 113);
+		panel.add(panel_5);
+		panel_5.setLayout(null);
+		
+		rdbtnAtivo = new JRadioButton("Ativo");
+		rdbtnAtivo.setBounds(8, 21, 89, 25);
+		panel_5.add(rdbtnAtivo);
+		
+		rdbtnDesativado = new JRadioButton("Desativado");
+		rdbtnDesativado.setBounds(8, 51, 110, 25);
+		panel_5.add(rdbtnDesativado);
+		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(284, 42, 365, 161);
 		contentPane.add(layeredPane);
@@ -1417,7 +1434,12 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setCidadeA(indiceCidadeA);
 							novoCircuito.setCidadeB(indiceCidadeB);
 							novoCircuito.setEstacaoA(indexEstacaoA);
-							novoCircuito.setEstacaoB(indexEstacaoB);							
+							novoCircuito.setEstacaoB(indexEstacaoB);	
+							if(rdbtnAtivo.isSelected()){
+								novoCircuito.setStatusCircuito("ativo");
+							}else if(rdbtnDesativado.isSelected()){
+								novoCircuito.setStatusCircuito("desativado");
+							}
 							novoCircuito.insereCircuito();
 							textFieldCircuito.setText("");
 							textFieldCliente.setText("");
@@ -1493,6 +1515,11 @@ public class TelaCadastroCircuito extends JFrame {
 								novoCircuito.setCidadeA(indiceCidadeA);
 								novoCircuito.setEstacaoA(indexEstacaoA);
 								novoCircuito.setEstacaoB(1);
+								if(rdbtnAtivo.isSelected()){
+									novoCircuito.setStatusCircuito("ativo");
+								}else if(rdbtnDesativado.isSelected()){
+									novoCircuito.setStatusCircuito("desativado");
+								}
 								novoCircuito.insereCircuito();
 								textFieldCircuito.setText("");
 								textFieldCliente.setText("");
@@ -1567,6 +1594,11 @@ public class TelaCadastroCircuito extends JFrame {
 								novoCircuito.setCidadeB(indiceCidadeB);
 								novoCircuito.setEstacaoB(indexEstacaoB);
 								novoCircuito.setEstacaoA(1);
+								if(rdbtnAtivo.isSelected()){
+									novoCircuito.setStatusCircuito("ativo");
+								}else if(rdbtnDesativado.isSelected()){
+									novoCircuito.setStatusCircuito("desativado");
+								}
 								novoCircuito.insereCircuito();
 								textFieldCircuito.setText("");
 								textFieldCliente.setText("");
@@ -1613,6 +1645,11 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
 							novoCircuito.setStatusA("p");
 							novoCircuito.setStatusB("pB");
+							if(rdbtnAtivo.isSelected()){
+								novoCircuito.setStatusCircuito("ativo");
+							}else if(rdbtnDesativado.isSelected()){
+								novoCircuito.setStatusCircuito("desativado");
+							}
 							novoCircuito.insereCircuito();
 							textFieldCircuito.setText("");
 							textFieldCliente.setText("");
@@ -1715,7 +1752,12 @@ public class TelaCadastroCircuito extends JFrame {
 						novoCircuito.setCidadeA(indiceCidadeA);
 						novoCircuito.setCidadeB(indiceCidadeB);
 						novoCircuito.setEstacaoA(indexEstacaoA);
-						novoCircuito.setEstacaoB(indexEstacaoB);							
+						novoCircuito.setEstacaoB(indexEstacaoB);	
+						if(rdbtnAtivo.isSelected()){
+							novoCircuito.setStatusCircuito("ativo");
+						}else if(rdbtnDesativado.isSelected()){
+							novoCircuito.setStatusCircuito("desativado");
+						}
 						novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
 						textFieldCircuito.setText("");
 						textFieldCliente.setText("");
@@ -1783,6 +1825,11 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setCidadeA(indiceCidadeA);
 							novoCircuito.setEstacaoA(indexEstacaoA);
 							novoCircuito.setEstacaoB(1);
+							if(rdbtnAtivo.isSelected()){
+								novoCircuito.setStatusCircuito("ativo");
+							}else if(rdbtnDesativado.isSelected()){
+								novoCircuito.setStatusCircuito("desativado");
+							}
 							novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
 							textFieldCircuito.setText("");
 							textFieldCliente.setText("");
@@ -1851,6 +1898,11 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setCidadeB(indiceCidadeB);
 							novoCircuito.setEstacaoB(indexEstacaoB);
 							novoCircuito.setEstacaoA(1);
+							if(rdbtnAtivo.isSelected()){
+								novoCircuito.setStatusCircuito("ativo");
+							}else if(rdbtnDesativado.isSelected()){
+								novoCircuito.setStatusCircuito("desativado");
+							}
 							novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
 							textFieldCircuito.setText("");
 							textFieldCliente.setText("");
@@ -1895,6 +1947,11 @@ public class TelaCadastroCircuito extends JFrame {
 						novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
 						novoCircuito.setStatusA("p");
 						novoCircuito.setStatusB("pB");
+						if(rdbtnAtivo.isSelected()){
+							novoCircuito.setStatusCircuito("ativo");
+						}else if(rdbtnDesativado.isSelected()){
+							novoCircuito.setStatusCircuito("desativado");
+						}
 						novoCircuito.atualizaCircuito(numeroCircuito, nomeCabeceira);
 						textFieldCircuito.setText("");
 						textFieldCliente.setText("");
