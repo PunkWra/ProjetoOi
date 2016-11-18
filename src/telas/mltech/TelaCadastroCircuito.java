@@ -232,7 +232,7 @@ public class TelaCadastroCircuito extends JFrame {
 					ConectaBanco conecta = new ConectaBanco();
 					conecta.conectaBanco();					
 					
-					String buscaStatus = "select * from circuito where circuitoNumero = '"+circuitoDesejado+"'";
+					String buscaStatus = "select * from circuito where circuitoNumero = '"+circuitoDesejado+"' and cabeceira = ' '";
 					rs = conecta.stm.executeQuery(buscaStatus);
 				
 					if(rs.next()){
@@ -488,7 +488,7 @@ public class TelaCadastroCircuito extends JFrame {
 					}											
 					
 				}catch(SQLException ev){
-					JOptionPane.showMessageDialog(null, ev);
+					JOptionPane.showMessageDialog(null, "Selecione Uma Cabeceira Para a LTG");
 					textFieldCircuito.setText("");
 				}
 				
@@ -766,7 +766,7 @@ public class TelaCadastroCircuito extends JFrame {
 						}											
 						
 					}catch(SQLException ev){
-						JOptionPane.showMessageDialog(null, ev);
+						JOptionPane.showMessageDialog(null, "Não Há Circuito Para Essa LTG Na Cabeceira Selecionada");
 						textFieldCircuito.setText("");
 					}					
 				}//Fim do segundo else
