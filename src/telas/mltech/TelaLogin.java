@@ -111,6 +111,7 @@ public class TelaLogin extends JFrame {
 				                    passwordField.setText("");                    
 				                    TelaOpcoes telaopcoes = new TelaOpcoes();
 				                    telaopcoes.setVisible(true);
+				                    dispose();
 				                
 				            }
 				            if(loginusuario.equals("visitante"))
@@ -166,6 +167,7 @@ public class TelaLogin extends JFrame {
 					JOptionPane.showMessageDialog(null, "Acesso Autorizado");
 					TelaOpcoes opcoes = new TelaOpcoes();
 					opcoes.setVisible(true);
+					dispose();
 					textFieldUsuario.setText("");
 					passwordField.setText("");
 				}else{
