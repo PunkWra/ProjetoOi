@@ -19,7 +19,7 @@ public class ConectaBanco {
 		con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistema_oi","root","root");
 		stm = con.createStatement();
 		}catch(SQLException e){
-			JOptionPane.showMessageDialog(null, e);
+			JOptionPane.showMessageDialog(null, "Não Foi Possível Conectar");
 		}
 	}
 	
