@@ -825,6 +825,7 @@ public class TelaCadastroCircuito extends JFrame {
 			public void itemStateChanged(ItemEvent arg0) {
 				if(chckbxSdh.isSelected()){
 					panel_1.setVisible(true);
+					chckbxPdh.setSelected(false);
 				}else{
 					panel_1.setVisible(false);
 				}
@@ -838,6 +839,7 @@ public class TelaCadastroCircuito extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(chckbxPdh.isSelected()){
 					panel_3.setVisible(true);
+					chckbxSdh.setSelected(false);
 				}else{
 					panel_3.setVisible(false);
 				}
@@ -856,6 +858,7 @@ public class TelaCadastroCircuito extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(chckbxSdh_1.isSelected()){
 					panel_2.setVisible(true);
+					chckbxPdh_1.setSelected(false);
 				}else{
 					panel_2.setVisible(false);
 				}
@@ -869,6 +872,7 @@ public class TelaCadastroCircuito extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(chckbxPdh_1.isSelected()){
 					panel_4.setVisible(true);
+					chckbxSdh_1.setSelected(false);
 				}else{
 					panel_4.setVisible(false);
 				}

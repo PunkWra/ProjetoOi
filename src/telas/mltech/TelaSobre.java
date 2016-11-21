@@ -51,8 +51,8 @@ public class TelaSobre extends JFrame {
 		lblDesenvolvidoPor.setBounds(26, 40, 118, 14);
 		panel.add(lblDesenvolvidoPor);
 		
-		JLabel lblMlTech = new JLabel("ML Tech");
-		lblMlTech.setBounds(154, 40, 60, 14);
+		JLabel lblMlTech = new JLabel("ML Solu\u00E7\u00F5es");
+		lblMlTech.setBounds(154, 40, 89, 14);
 		panel.add(lblMlTech);
 		
 		JLabel lblContato = new JLabel("Contato:");
