@@ -228,6 +228,7 @@ public class TelaCadastroCircuito extends JFrame {
 				ResultSet RS = null;
 				String statusA = null;
 				String statusB = null;
+				String statusCircuito = null;
 				try{
 					ConectaBanco conecta = new ConectaBanco();
 					conecta.conectaBanco();					
@@ -246,6 +247,7 @@ public class TelaCadastroCircuito extends JFrame {
 						indexCidadeB = rs.getInt("codCidadeB");
 						indexEstacaoA = rs.getInt("codEstacaoA");
 						indexEstacaoB = rs.getInt("codEstacaoB");
+						statusCircuito = rs.getString("statusCircuito");
 					}
 					if(("s".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
 						panel_1.setVisible(true);
@@ -307,6 +309,11 @@ public class TelaCadastroCircuito extends JFrame {
 						textFieldDidSDHA.setText(rs.getString("didA"));		
 						comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 						comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+						if(statusCircuito.equals("ativo")){
+							rdbtnAtivo.setSelected(true);
+						}else{
+							rdbtnDesativado.setSelected(true);
+						}
 						
 						
 						//Carregando dados da ponta B SDH
@@ -369,6 +376,11 @@ public class TelaCadastroCircuito extends JFrame {
 						textFieldDidSDHA.setText(rs.getString("didA"));	
 						comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 						comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+						if(statusCircuito.equals("ativo")){
+							rdbtnAtivo.setSelected(true);
+						}else{
+							rdbtnDesativado.setSelected(true);
+						}
 						
 						//Carrega dados da ponta B PDH
 						comboBoxCidadeB.setSelectedItem(cidadeB);
@@ -419,6 +431,11 @@ public class TelaCadastroCircuito extends JFrame {
 						comboBoxPDHA.setSelectedItem(pdhA);
 						textFieldPortaPDHA.setText(rs.getString("portaA"));
 						textFieldDidPDHA.setText(rs.getString("didA"));
+						if(statusCircuito.equals("ativo")){
+							rdbtnAtivo.setSelected(true);
+						}else{
+							rdbtnDesativado.setSelected(true);
+						}
 						
 						//Carrega dados da ponta B PDH
 						comboBoxCidadeB.setSelectedItem(cidadeB);
@@ -476,6 +493,11 @@ public class TelaCadastroCircuito extends JFrame {
 						comboBoxPDHA.setSelectedItem(pdhA);
 						textFieldPortaPDHA.setText(rs.getString("portaA"));
 						textFieldDidPDHA.setText(rs.getString("didA"));
+						if(statusCircuito.equals("ativo")){
+							rdbtnAtivo.setSelected(true);
+						}else{
+							rdbtnDesativado.setSelected(true);
+						}
 						
 						//Carrega dados ponta B SDH
 						comboBoxSDHB.setSelectedItem(sdhB);
@@ -503,6 +525,7 @@ public class TelaCadastroCircuito extends JFrame {
 					ResultSet RS = null;
 					String statusA = null;
 					String statusB = null;
+					String statusCircuito = null;
 					try{
 						ConectaBanco conecta = new ConectaBanco();
 						conecta.conectaBanco();					
@@ -520,7 +543,8 @@ public class TelaCadastroCircuito extends JFrame {
 							indexCidadeA = rs.getInt("codCidadeA");
 							indexCidadeB = rs.getInt("codCidadeB");
 							indexEstacaoA = rs.getInt("codEstacaoA");
-							indexEstacaoB = rs.getInt("codEstacaoB");							
+							indexEstacaoB = rs.getInt("codEstacaoB");	
+							statusCircuito = rs.getString("statusCircuito");
 						}
 						if(("s".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
 							panel_1.setVisible(true);
@@ -581,7 +605,12 @@ public class TelaCadastroCircuito extends JFrame {
 							comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
 							textFieldDidSDHA.setText(rs.getString("didA"));	
 							comboBoxCidadeSDHA.setSelectedItem(cidadeA);
-							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);							
+							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);	
+							if(statusCircuito.equals("ativo")){
+								rdbtnAtivo.setSelected(true);
+							}else{
+								rdbtnDesativado.setSelected(true);
+							}
 							
 							//Carregando dados da ponta B SDH
 							comboBoxSDHB.setSelectedItem(sdhB);
@@ -645,6 +674,11 @@ public class TelaCadastroCircuito extends JFrame {
 							textFieldDidSDHA.setText(rs.getString("didA"));	
 							comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+							if(statusCircuito.equals("ativo")){
+								rdbtnAtivo.setSelected(true);
+							}else{
+								rdbtnDesativado.setSelected(true);
+							}
 							
 							//Carrega dados da ponta B PDH
 							comboBoxCidadeB.setSelectedItem(cidadeB);
@@ -696,6 +730,11 @@ public class TelaCadastroCircuito extends JFrame {
 							comboBoxPDHA.setSelectedItem(pdhA);
 							textFieldPortaPDHA.setText(rs.getString("portaA"));
 							textFieldDidPDHA.setText(rs.getString("didA"));
+							if(statusCircuito.equals("ativo")){
+								rdbtnAtivo.setSelected(true);
+							}else{
+								rdbtnDesativado.setSelected(true);
+							}
 							
 							//Carrega dados da ponta B PDH
 							comboBoxCidadeB.setSelectedItem(cidadeB);
@@ -755,6 +794,11 @@ public class TelaCadastroCircuito extends JFrame {
 							comboBoxPDHA.setSelectedItem(pdhA);
 							textFieldPortaPDHA.setText(rs.getString("portaA"));
 							textFieldDidPDHA.setText(rs.getString("didA"));
+							if(statusCircuito.equals("ativo")){
+								rdbtnAtivo.setSelected(true);
+							}else{
+								rdbtnDesativado.setSelected(true);
+							}
 							
 							//Carrega dados ponta B SDH
 							comboBoxSDHB.setSelectedItem(sdhB);
@@ -1749,8 +1793,8 @@ public class TelaCadastroCircuito extends JFrame {
 						novoCircuito.setEquipamentoSDHB(indexSDHB);
 						novoCircuito.setSlotB(textFieldSlotSDHB.getText());
 						novoCircuito.setPortaB((String)comboBoxPortaSDHB.getSelectedItem());
-						novoCircuito.setDidB(textFieldDidSDHB.getText());
-						novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+						novoCircuito.setDidB(textFieldDidSDHB.getText());					
+						novoCircuito.setCabeceira(nomeCabeceira);						
 						novoCircuito.setStatusA("s");
 						novoCircuito.setStatusB("sB");
 						novoCircuito.setCidadeA(indiceCidadeA);
@@ -1772,6 +1816,7 @@ public class TelaCadastroCircuito extends JFrame {
 						textFieldDidSDHB.setText("");
 					    buttonSalvar.setEnabled(true);
 					    buttonAtualizar.setEnabled(false);
+					   
 				
 			}//Fim da lógica de verificação e inserção dos dados para SDH nas duas pontas
 			//Início da lógica Para Inserção de Dados para SDH na ponta A e PDH na ponta B
@@ -1823,7 +1868,7 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setEquipamentoPDHB(comboBoxPDHB.getSelectedIndex());
 							novoCircuito.setPortaB(textFieldPortaPDHB.getText());
 							novoCircuito.setDidB(textFieldDidPDHB.getText());
-							novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+							novoCircuito.setCabeceira(nomeCabeceira);
 							novoCircuito.setStatusA("s");
 							novoCircuito.setStatusB("pB");
 							novoCircuito.setCidadeA(indiceCidadeA);
@@ -1897,8 +1942,8 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setPortaB((String)comboBoxPortaSDHB.getSelectedItem());
 							novoCircuito.setDidB(textFieldDidSDHB.getText());
 							novoCircuito.setStatusA("p");
-							novoCircuito.setStatusB("sB");
-							novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+							novoCircuito.setStatusB("sB");							
+							novoCircuito.setCabeceira(nomeCabeceira);							
 							novoCircuito.setCidadeB(indiceCidadeB);
 							novoCircuito.setEstacaoB(indexEstacaoB);
 							novoCircuito.setEstacaoA(1);
@@ -1915,6 +1960,7 @@ public class TelaCadastroCircuito extends JFrame {
 							textFieldDidPDHA.setText("");		
 							buttonSalvar.setEnabled(true);
 						    buttonAtualizar.setEnabled(false);
+						  
 										
 				
 			}//Fim da Lógica de verificação e inserção dos dados para PDH na ponta A e SDH na ponta B
@@ -1947,8 +1993,8 @@ public class TelaCadastroCircuito extends JFrame {
 						novoCircuito.setCidadeB(indiceCidadeB);
 						novoCircuito.setEquipamentoPDHB(comboBoxPDHB.getSelectedIndex());
 						novoCircuito.setPortaB(textFieldPortaPDHB.getText());
-						novoCircuito.setDidB(textFieldDidPDHB.getText());
-						novoCircuito.setCabeceira((String)comboBoxCabeceira.getSelectedItem());
+						novoCircuito.setDidB(textFieldDidPDHB.getText());					
+						novoCircuito.setCabeceira(nomeCabeceira);						
 						novoCircuito.setStatusA("p");
 						novoCircuito.setStatusB("pB");
 						if(rdbtnAtivo.isSelected()){

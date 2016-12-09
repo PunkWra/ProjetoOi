@@ -88,7 +88,7 @@ public class TelaOpcoes extends JFrame {
 		});
 		mnArquivo.add(mntmSair);
 		
-		JMenu mnEditar = new JMenu("Editar");
+		JMenu mnEditar = new JMenu("Pesquisar");
 		menuBar.add(mnEditar);
 		
 		JMenuItem mntmCircuito_1 = new JMenuItem("Circuito");
