@@ -94,7 +94,7 @@ public class TelaOpcoes extends JFrame {
 		JMenuItem mntmCircuito_1 = new JMenuItem("Circuito");
 		mntmCircuito_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroCircuito novoCircuito = new TelaCadastroCircuito();
+				TelaOpcaoCircuito novoCircuito = new TelaOpcaoCircuito();
 				novoCircuito.setVisible(true);
 			}
 		});
