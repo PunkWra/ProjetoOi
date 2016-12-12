@@ -22,7 +22,14 @@ public class Placa {
 	private String statusPlaca;
 	private String tecnicaPlaca;
 	private String almoxPlaca;
+	private String ultimoComentario;
 	
+	public String getUltimoComentario() {
+		return ultimoComentario;
+	}
+	public void setUltimoComentario(String ultimoComentario) {
+		this.ultimoComentario = ultimoComentario;
+	}
 	public String getAlmoxPlaca() {
 		return almoxPlaca;
 	}
@@ -119,7 +126,7 @@ public class Placa {
 		try{
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();
-			String inserePlaca = "insert into placa(serialPlaca,localPlaca,dataEnvio,observacoes,cidade,estacao,modelo,statusPlaca,tecnicaPlaca,almoxPlaca) values(?,?,?,?,?,?,?,?,?,?)";
+			String inserePlaca = "insert into placa(serialPlaca,localPlaca,dataEnvio,observacoes,cidade,estacao,modelo,statusPlaca,tecnicaPlaca,almoxPlaca,ultimoComentario) values(?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement stm = conecta.con.prepareStatement(inserePlaca);
 			stm.setString(1, this.serialPlaca);
 			stm.setString(2, this.localPlaca);
@@ -135,6 +142,7 @@ public class Placa {
 			stm.setString(8, this.statusPlaca);
 			stm.setString(9, this.tecnicaPlaca);
 			stm.setString(10, this.almoxPlaca);
+			stm.setString(11, this.ultimoComentario);
 			stm.executeUpdate();
 			stm.close();
 			conecta.con.close();				
@@ -151,7 +159,7 @@ public class Placa {
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();
 			
-			String atualizaPlaca = "update placa set localPlaca=?,dataEnvio=?,observacoes=?,cidade=?,estacao=?,modelo=?,statusPlaca=?,tecnicaPlaca=?,almoxPlaca=? where serialPlaca='"+this.serialPlaca+"'";
+			String atualizaPlaca = "update placa set localPlaca=?,dataEnvio=?,observacoes=?,cidade=?,estacao=?,modelo=?,statusPlaca=?,tecnicaPlaca=?,almoxPlaca=?,ultimoComentario=? where serialPlaca='"+this.serialPlaca+"'";
 			PreparedStatement stm = conecta.con.prepareStatement(atualizaPlaca);
 			stm.setString(1, this.localPlaca);
 			if(this.dataEnvio!=null){
@@ -166,6 +174,7 @@ public class Placa {
 			stm.setString(7, this.statusPlaca);
 			stm.setString(8, this.tecnicaPlaca);
 			stm.setString(9, this.almoxPlaca);
+			stm.setString(10, this.ultimoComentario);
 			stm.executeUpdate();
 			stm.close();
 			conecta.con.close();			

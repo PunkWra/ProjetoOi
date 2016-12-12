@@ -42,6 +42,7 @@ public class TelaMostraPlacas extends JFrame {
 	private JRadioButton rdbtnPlantaInterna;
 	private JRadioButton rdbtnReparo;
 	private JComboBox comboBoxModelo;
+	public String novoComentario;
 
 	/**
 	 * Launch the application.
@@ -108,7 +109,7 @@ public class TelaMostraPlacas extends JFrame {
 			rs = conecta.stm.executeQuery(sql);
 			
 			while(rs.next()){
-				dados.add(new Object[]{(String)comboBoxModelo.getSelectedItem(),rs.getString("serialPlaca"),rs.getString("observacoes")});
+				dados.add(new Object[]{(String)comboBoxModelo.getSelectedItem(),rs.getString("serialPlaca"),rs.getString("ultimoComentario")});
 			};
 			
 		}catch(SQLException e){
@@ -153,6 +154,11 @@ public class TelaMostraPlacas extends JFrame {
 		menuBar.add(mnArquivo);
 		
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		mnArquivo.add(mntmSair);
 		
 		JMenu mnSobre = new JMenu("Sobre");
@@ -335,6 +341,7 @@ public class TelaMostraPlacas extends JFrame {
 				int indiceTX = 0;
 				String statusDaPlaca = "Almox";
 				ConectaBanco conecta = new ConectaBanco();
+				
 				//Verifica se botão foi clicado sem nenhuma opção selecionada
 				if((!(rdbtnFilial.isSelected()))&&(!(rdbtnPlantaInterna.isSelected()))&&(!(rdbtnReparo.isSelected()))){
 					JOptionPane.showMessageDialog(null, "Selecione Uma das Opções Em \"Busca Por:\"");
@@ -373,11 +380,27 @@ public class TelaMostraPlacas extends JFrame {
 							
 							}catch(SQLException e){
 								JOptionPane.showMessageDialog(null, e);
+							}						
+							
+						}else{
+							String reparo = "Reparo";
+							
+							try{
+								String buscaIndicePlaca = "select * from modeloplaca where partNumbermodelo='"+modeloPlaca+"'";
+								rs = conecta.stm.executeQuery(buscaIndicePlaca);
+								
+								while(rs.next()){
+									indiceTX = rs.getInt("idModelo");
+								}
+								
+								preencherTabelaPlanta("select * from placa where modelo='"+indiceTX+"' and statusPlaca='"+reparo+"'");								
+								
+							}catch(SQLException e){
+								JOptionPane.showMessageDialog(null, e);
 							}
 							
 							
 						}
-					
 					
 				}
 			}

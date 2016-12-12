@@ -75,6 +75,7 @@ public class TelaPlaca extends JFrame {
 	private String novoComentario;
 	private String observacaoAnterior;
 	private JButton buttonAtualizar;
+	private String ultimoComentario;
 
 	/**
 	 * Launch the application.
@@ -1329,6 +1330,7 @@ public class TelaPlaca extends JFrame {
 					novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 					novaPlaca.setStatusPlaca("Reparo");
 					novaPlaca.setAlmoxPlaca(null);
+					novaPlaca.setUltimoComentario(novoComentario);
 					novaPlaca.atualizaPlaca();
 					JOptionPane.showMessageDialog(null, "Cadastro Atualizado");
 					
@@ -1376,6 +1378,7 @@ public class TelaPlaca extends JFrame {
 					novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 					novaPlaca.setStatusPlaca("Planta");
 					novaPlaca.setAlmoxPlaca(null);
+					novaPlaca.setUltimoComentario(novoComentario);
 					novaPlaca.atualizaPlaca();
 					JOptionPane.showMessageDialog(null, "Cadastro Atualizado");
 					
@@ -1602,15 +1605,20 @@ public class TelaPlaca extends JFrame {
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				novoComentario = JOptionPane.showInputDialog("Observações");
+				Placa novaObservacao = new Placa();
+	
 				if(textArea.getText().isEmpty()){				
 				if(novoComentario==null){
 					
 				}else{
 				textArea.setText(java.time.LocalDate.now()+" "+novoComentario);
+				TelaMostraPlacas comentario = new TelaMostraPlacas();
+				novaObservacao.setUltimoComentario(novoComentario);
 				}
 				}else{
 					observacaoAnterior = textArea.getText();
 					textArea.setText(observacaoAnterior+"\n\n"+java.time.LocalDate.now()+" "+novoComentario);
+					novaObservacao.setUltimoComentario(novoComentario);
 				}
 			}
 		});
