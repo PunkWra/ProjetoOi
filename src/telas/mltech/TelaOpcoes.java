@@ -103,8 +103,8 @@ public class TelaOpcoes extends JFrame {
 		JMenuItem mntmPlacamdulo_1 = new JMenuItem("Placa/M\u00F3dulo");
 		mntmPlacamdulo_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPlaca alteraPlaca = new TelaPlaca();
-				alteraPlaca.setVisible(true);
+				TelaMostraPlacas mostraPlaca = new TelaMostraPlacas();
+				mostraPlaca.setVisible(true);
 			}
 		});
 		mnEditar.add(mntmPlacamdulo_1);

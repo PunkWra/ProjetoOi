@@ -30,6 +30,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 public class TelaMostraPlacas extends JFrame {
 
@@ -134,6 +135,7 @@ public class TelaMostraPlacas extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaMostraPlacas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaMostraPlacas.class.getResource("/imagens/mltech/thCGK4S3UD.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 658, 429);
 		contentPane = new JPanel();
@@ -165,6 +167,12 @@ public class TelaMostraPlacas extends JFrame {
 		menuBar.add(mnSobre);
 		
 		JMenuItem mntmSobre = new JMenuItem("Sobre");
+		mntmSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaSobre novaTelaSobre = new TelaSobre();
+				novaTelaSobre.setVisible(true);
+			}
+		});
 		mnSobre.add(mntmSobre);
 		
 		JPanel panel_1 = new JPanel();
