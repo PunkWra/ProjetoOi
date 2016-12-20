@@ -840,6 +840,8 @@ public class TelaPlaca extends JFrame {
 				if((evt.getKeyCode()==KeyEvent.VK_DELETE)||(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE)){
 					buttonSalvar.setEnabled(true);
 					buttonAtualizar.setEnabled(false);
+					textArea.setText("");
+					
 				}
 			}
 		});
