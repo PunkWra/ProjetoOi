@@ -115,7 +115,7 @@ public class TelaCadastroCircuito extends JFrame {
 		});
 	}
 	
-	
+	/*
 	public void buscaSDH(){
 		
 		ResultSet rs = null;
@@ -137,6 +137,7 @@ public class TelaCadastroCircuito extends JFrame {
 		}		
 		
 	}//Fim do método de buscar SDH
+	*/
 	
 	public void buscaRadio(){
 		
@@ -992,6 +993,7 @@ public class TelaCadastroCircuito extends JFrame {
 		panel_3.add(lblEquipamento_2);
 		
 		comboBoxPDHA = new JComboBox();
+		comboBoxPDHA.setModel(new DefaultComboBoxModel(new String[] {""}));
 		comboBoxPDHA.setBounds(220, 41, 102, 20);
 		panel_3.add(comboBoxPDHA);
 		
@@ -1021,42 +1023,42 @@ public class TelaCadastroCircuito extends JFrame {
 		panel_1.setLayout(null);
 		
 		JLabel lblEquipamento = new JLabel("Equipamento");
-		lblEquipamento.setBounds(10, 21, 108, 14);
+		lblEquipamento.setBounds(10, 70, 108, 14);
 		panel_1.add(lblEquipamento);
 		
 		comboBoxSDHA = new JComboBox();
-		comboBoxSDHA.setBounds(10, 39, 85, 20);
+		comboBoxSDHA.setBounds(10, 88, 85, 20);
 		panel_1.add(comboBoxSDHA);
 		
 		JLabel lblSlot = new JLabel("Slot");
-		lblSlot.setBounds(105, 21, 36, 14);
+		lblSlot.setBounds(106, 70, 36, 14);
 		panel_1.add(lblSlot);
 		
 		textFieldSlotSDHA = new JTextField();
-		textFieldSlotSDHA.setBounds(103, 39, 59, 20);
+		textFieldSlotSDHA.setBounds(107, 88, 59, 20);
 		panel_1.add(textFieldSlotSDHA);
 		textFieldSlotSDHA.setColumns(10);
 		
 		JLabel lblPorta = new JLabel("Porta");
-		lblPorta.setBounds(169, 21, 46, 14);
+		lblPorta.setBounds(178, 70, 46, 14);
 		panel_1.add(lblPorta);
 		
 		comboBoxPortaSDHA = new JComboBox();
 		comboBoxPortaSDHA.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63"}));
-		comboBoxPortaSDHA.setBounds(172, 39, 71, 20);
+		comboBoxPortaSDHA.setBounds(178, 88, 71, 20);
 		panel_1.add(comboBoxPortaSDHA);
 		
 		JLabel lblDid = new JLabel("DID");
-		lblDid.setBounds(249, 21, 46, 14);
+		lblDid.setBounds(269, 70, 46, 14);
 		panel_1.add(lblDid);
 		
 		textFieldDidSDHA = new JTextField();
-		textFieldDidSDHA.setBounds(253, 39, 86, 20);
+		textFieldDidSDHA.setBounds(267, 88, 86, 20);
 		panel_1.add(textFieldDidSDHA);
 		textFieldDidSDHA.setColumns(10);
 		
 		JLabel lblLocalidade_2 = new JLabel("Localidade");
-		lblLocalidade_2.setBounds(10, 70, 91, 14);
+		lblLocalidade_2.setBounds(10, 21, 91, 14);
 		panel_1.add(lblLocalidade_2);
 		
 		comboBoxCidadeSDHA = new JComboBox();
@@ -1090,15 +1092,50 @@ public class TelaCadastroCircuito extends JFrame {
 			}
 		});
 		comboBoxCidadeSDHA.setModel(new DefaultComboBoxModel(new String[] {""}));
-		comboBoxCidadeSDHA.setBounds(10, 88, 205, 20);
+		comboBoxCidadeSDHA.setBounds(12, 39, 205, 20);
 		panel_1.add(comboBoxCidadeSDHA);
 		
 		JLabel lblEstao = new JLabel("Esta\u00E7\u00E3o");
-		lblEstao.setBounds(236, 70, 59, 14);
+		lblEstao.setBounds(231, 21, 59, 14);
 		panel_1.add(lblEstao);
 		
 		comboBoxEstacaoSDHA = new JComboBox();
-		comboBoxEstacaoSDHA.setBounds(236, 88, 86, 20);
+		comboBoxEstacaoSDHA.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				ResultSet rs = null;
+				String estacaoSelecionada = (String)comboBoxEstacaoSDHA.getSelectedItem();
+				int indiceEstacao = 0;
+				String statusSDH = "ativo";
+				comboBoxSDHA.removeAllItems();
+				
+				try{
+					ConectaBanco conecta = new ConectaBanco();
+					conecta.conectaBanco();
+					
+					//Buscar primeiro o índice da Estação para saber os SDH ligados à essa estação
+					String buscaIndiceEstacao = "select * from estacao where estacaoSigla='"+estacaoSelecionada+"'";
+					rs = conecta.stm.executeQuery(buscaIndiceEstacao);
+					
+					while(rs.next()){
+						indiceEstacao = rs.getInt("idEstacao");
+					}
+					
+					
+					//Buscar os SDH ligados a estação selecionada
+					String buscaSDH = "select * from sdh where idEstacao='"+indiceEstacao+"' and statusSDH='"+statusSDH+"'";
+					rs = conecta.stm.executeQuery(buscaSDH);
+					
+					while(rs.next()){
+						comboBoxSDHA.addItem(rs.getString("sdhNome"));						
+					}					
+					
+				}catch(SQLException e){
+					JOptionPane.showMessageDialog(null, e);
+				}
+				
+			}
+		});
+		comboBoxEstacaoSDHA.setBounds(229, 39, 86, 20);
 		panel_1.add(comboBoxEstacaoSDHA);
 		//Inicia os painéis não visíveis
 		panel_1.setVisible(false);
@@ -1127,6 +1164,7 @@ public class TelaCadastroCircuito extends JFrame {
 		panel_4.add(lblEquipamento_3);
 		
 		comboBoxPDHB = new JComboBox();
+		comboBoxPDHB.setModel(new DefaultComboBoxModel(new String[] {""}));
 		comboBoxPDHB.setBounds(219, 42, 95, 20);
 		panel_4.add(comboBoxPDHB);
 		
@@ -1156,42 +1194,42 @@ public class TelaCadastroCircuito extends JFrame {
 		panel_2.setLayout(null);
 		
 		JLabel lblEquipamento_1 = new JLabel("Equipamento");
-		lblEquipamento_1.setBounds(10, 26, 81, 14);
+		lblEquipamento_1.setBounds(10, 83, 81, 14);
 		panel_2.add(lblEquipamento_1);
 		
 		comboBoxSDHB = new JComboBox();
-		comboBoxSDHB.setBounds(10, 44, 81, 20);
+		comboBoxSDHB.setBounds(10, 100, 81, 20);
 		panel_2.add(comboBoxSDHB);
 		
 		JLabel lblSlot_1 = new JLabel("Slot");
-		lblSlot_1.setBounds(101, 26, 46, 14);
+		lblSlot_1.setBounds(103, 83, 46, 14);
 		panel_2.add(lblSlot_1);
 		
 		textFieldSlotSDHB = new JTextField();
-		textFieldSlotSDHB.setBounds(101, 44, 60, 20);
+		textFieldSlotSDHB.setBounds(103, 100, 60, 20);
 		panel_2.add(textFieldSlotSDHB);
 		textFieldSlotSDHB.setColumns(10);
 		
 		JLabel lblPorta_1 = new JLabel("Porta");
-		lblPorta_1.setBounds(171, 26, 46, 14);
+		lblPorta_1.setBounds(175, 83, 46, 14);
 		panel_2.add(lblPorta_1);
 		
 		comboBoxPortaSDHB = new JComboBox();
 		comboBoxPortaSDHB.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63"}));
-		comboBoxPortaSDHB.setBounds(171, 44, 67, 20);
+		comboBoxPortaSDHB.setBounds(175, 100, 80, 20);
 		panel_2.add(comboBoxPortaSDHB);
 		
 		JLabel lblDid_1 = new JLabel("DID");
-		lblDid_1.setBounds(246, 26, 46, 14);
+		lblDid_1.setBounds(262, 83, 46, 14);
 		panel_2.add(lblDid_1);
 		
 		textFieldDidSDHB = new JTextField();
-		textFieldDidSDHB.setBounds(248, 44, 86, 20);
+		textFieldDidSDHB.setBounds(267, 100, 86, 20);
 		panel_2.add(textFieldDidSDHB);
 		textFieldDidSDHB.setColumns(10);
 		
 		lblLocalidade_3 = new JLabel("Localidade");
-		lblLocalidade_3.setBounds(10, 83, 81, 14);
+		lblLocalidade_3.setBounds(12, 26, 81, 14);
 		panel_2.add(lblLocalidade_3);
 		
 		comboBoxCidadeSDHB = new JComboBox();
@@ -1225,15 +1263,50 @@ public class TelaCadastroCircuito extends JFrame {
 			}
 		});
 		comboBoxCidadeSDHB.setModel(new DefaultComboBoxModel(new String[] {""}));
-		comboBoxCidadeSDHB.setBounds(10, 101, 213, 20);
+		comboBoxCidadeSDHB.setBounds(12, 44, 213, 20);
 		panel_2.add(comboBoxCidadeSDHB);
 		
 		lblEstao_1 = new JLabel("Esta\u00E7\u00E3o");
-		lblEstao_1.setBounds(246, 83, 60, 14);
+		lblEstao_1.setBounds(237, 26, 60, 14);
 		panel_2.add(lblEstao_1);
 		
 		comboBoxEstacaoSDHB = new JComboBox();
-		comboBoxEstacaoSDHB.setBounds(246, 101, 88, 20);
+		comboBoxEstacaoSDHB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ResultSet rs = null;
+				String estacaoSelecionada = (String)comboBoxEstacaoSDHB.getSelectedItem();
+				int indiceEstacao = 0;
+				String statusSDH = "ativo";
+				comboBoxSDHB.removeAllItems();
+				
+				try{
+					ConectaBanco conecta = new ConectaBanco();
+					conecta.conectaBanco();
+					
+					//Buscar primeiro o índice da Estação para saber os SDH ligados à essa estação
+					String buscaIndiceEstacao = "select * from estacao where estacaoSigla='"+estacaoSelecionada+"'";
+					rs = conecta.stm.executeQuery(buscaIndiceEstacao);
+					
+					while(rs.next()){
+						indiceEstacao = rs.getInt("idEstacao");
+					}
+					
+					//Buscar os SDH ligados a estação selecionada
+					String buscaSDH = "select * from sdh where idEstacao='"+indiceEstacao+"' and statusSDH='"+statusSDH+"'";
+					rs = conecta.stm.executeQuery(buscaSDH);
+					
+					while(rs.next()){
+						comboBoxSDHB.addItem(rs.getString("sdhNome"));
+					}					
+					
+				}catch(SQLException e){
+					JOptionPane.showMessageDialog(null, e);
+				}
+				
+			}
+		});
+		comboBoxEstacaoSDHB.setBounds(237, 44, 88, 20);
 		panel_2.add(comboBoxEstacaoSDHB);
 		panel_2.setVisible(false);
 		
@@ -2027,7 +2100,7 @@ public class TelaCadastroCircuito extends JFrame {
 		buttonAtualizar.setBounds(84, 0, 45, 31);
 		contentPane.add(buttonAtualizar);
 		
-		buscaSDH();
+		//buscaSDH();
 		buscaRadio();
 		buscaCidade();
 		buttonAtualizar.setEnabled(false);

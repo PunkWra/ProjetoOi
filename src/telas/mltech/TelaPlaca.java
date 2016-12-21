@@ -327,6 +327,7 @@ public class TelaPlaca extends JFrame {
 									novaPlaca.setIndiceEstacao(1);
 									novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 									novaPlaca.setAlmoxPlaca(almox);
+									novaPlaca.setUltimoComentario(ultimoComentario);
 									novaPlaca.inserePlaca();
 									JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso");
 									textArea.setText("");
@@ -460,6 +461,7 @@ public class TelaPlaca extends JFrame {
 						novaPlaca.setObervacoes(textArea.getText());
 						novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 						novaPlaca.setStatusPlaca("Reparo");
+						novaPlaca.setUltimoComentario(ultimoComentario);
 						novaPlaca.inserePlaca();
 						JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso");
 						textArea.setText("");
@@ -612,6 +614,7 @@ public class TelaPlaca extends JFrame {
 						novaPlaca.setObervacoes(textArea.getText());
 						novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 						novaPlaca.setStatusPlaca("Planta");
+						novaPlaca.setUltimoComentario(ultimoComentario);
 						novaPlaca.inserePlaca();
 						JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso");
 						textArea.setText("");
@@ -747,6 +750,7 @@ public class TelaPlaca extends JFrame {
 						novaPlaca.setIndiceEstacao(1);
 						novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 						novaPlaca.setStatusPlaca("Filial");
+						novaPlaca.setUltimoComentario(ultimoComentario);
 						novaPlaca.inserePlaca();
 						JOptionPane.showMessageDialog(null, "Cadastro Realizado Com Sucesso");
 						textArea.setText("");
@@ -1292,6 +1296,7 @@ public class TelaPlaca extends JFrame {
 					novaPlaca.setIndiceEstacao(1);
 					novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 					novaPlaca.setAlmoxPlaca(almox);
+					novaPlaca.setUltimoComentario(ultimoComentario);
 					novaPlaca.atualizaPlaca();
 					JOptionPane.showMessageDialog(null, "Cadastro Atualizado");
 										
@@ -1421,6 +1426,7 @@ public class TelaPlaca extends JFrame {
 					novaPlaca.setTecnicaPlaca(tecnicaPlaca);
 					novaPlaca.setStatusPlaca("Filial");
 					novaPlaca.setAlmoxPlaca(null);
+					novaPlaca.setUltimoComentario(ultimoComentario);
 					novaPlaca.atualizaPlaca();
 					JOptionPane.showMessageDialog(null, "Cadastro Atualizado");					
 					
@@ -1595,7 +1601,7 @@ public class TelaPlaca extends JFrame {
 		contentPane.add(lblAlmox);
 		
 		comboBoxAlmox = new JComboBox();
-		comboBoxAlmox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o Almox", "Caxias do Sul", "Erechim", "Palmeira das Miss\u00F5es", "Passo Fundo", "Pelotas", "Porto Alegre", "Santa Maria", "Santo \u00C2ngelo", "Uruguaiana"}));
+		comboBoxAlmox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o Almox", "Caxias do Sul", "Cruz Alta", "Erechim", "Palmeira das Miss\u00F5es", "Passo Fundo", "Pelotas", "Porto Alegre", "Santa Maria", "Santo \u00C2ngelo", "Uruguaiana"}));
 		comboBoxAlmox.setBounds(10, 244, 166, 20);
 		contentPane.add(comboBoxAlmox);
 		
