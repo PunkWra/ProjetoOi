@@ -108,7 +108,7 @@ public class Placa {
 			while(rs.next()){
 				if(serial.equals(rs.getString("serialPlaca"))){
 					retorno = true;
-					JOptionPane.showMessageDialog(null, "Placa Já Cadastrada");
+					//JOptionPane.showMessageDialog(null, "Placa Já Cadastrada");
 					break;
 				}
 			}		

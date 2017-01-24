@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableModel;
 
 import classes.mltech.ConectaBanco;
 import classes.mltech.ModeloTabela;
@@ -31,6 +32,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaMostraPlacas extends JFrame {
 
@@ -339,6 +342,17 @@ public class TelaMostraPlacas extends JFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int index = table.getSelectedRow();
+				TableModel model = table.getModel();
+				String serialPlaca = model.getValueAt(index, 1).toString();
+				TelaPlaca nova = new TelaPlaca();
+				nova.recebeSerial(serialPlaca);
+				nova.setVisible(true);
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		JButton button = new JButton("");

@@ -76,6 +76,7 @@ public class TelaPlaca extends JFrame {
 	private String observacaoAnterior;
 	private JButton buttonAtualizar;
 	private String ultimoComentario;
+	private JButton buttonSalvar;
 
 	/**
 	 * Launch the application.
@@ -138,6 +139,168 @@ public class TelaPlaca extends JFrame {
 		
 	}//Fim do método de busca das cidades
 	
+	public void recebeSerial(String novoSerial){
+
+		
+		boolean verifica;
+		ResultSet rs = null;
+		ResultSet RS = null;
+		ResultSet RS1 = null;
+		String status = null;
+		String modelo = null;
+		String tecnica = null;
+		String cidade = null;
+		
+		//Pesquisa Se Placa Já Está Cadastrada
+		//String serial = JOptionPane.showInputDialog("Informe o Serial da Placa");
+							
+				Placa placa = new Placa();	
+				novoSerial = novoSerial.replace(" ", "").toUpperCase();
+				verifica = placa.verificaPlaca(novoSerial);
+				if(verifica==false){
+					JOptionPane.showMessageDialog(null, "Placa Não Cadastrada");
+				}else if(verifica==true){
+					buttonSalvar.setEnabled(false);
+					buttonAtualizar.setEnabled(true);
+						try{
+							ConectaBanco conecta = new ConectaBanco();
+							conecta.conectaBanco();
+							
+							String buscaStatus = "select * from placa where serialPlaca='"+novoSerial+"'";
+							rs = conecta.stm.executeQuery(buscaStatus);
+							
+							while(rs.next()){
+								status=rs.getString("statusPlaca");
+								tecnica = rs.getString("tecnicaPlaca");
+								String buscaModelo = "select * from modeloplaca where idModelo='"+rs.getString("modelo")+"'";
+								RS = conecta.stm.executeQuery(buscaModelo);
+								
+								String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
+								RS1 = conecta.stm.executeQuery(buscaCidade);
+								
+								while(RS1.next()){
+									cidade = RS1.getString("cidadeNome");
+								}
+								
+								while(RS.next()){
+									modelo = RS.getString("partNumberModelo");											
+								}
+							
+							if("Almox".equals(status)){
+								
+								if("TX".equals(tecnica)){
+									rdbtnTX.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("CX".equals(tecnica)){
+									rdbtnCx.setSelected(true);
+									rdbtnTX.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("DADOS".equals(tecnica)){
+									rdbtnDados.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnTX.setSelected(false);
+								}
+								
+								rdbtnAlmox.setSelected(true);
+								textFieldLocal.setText(rs.getString("localPlaca"));
+								comboBoxPartNumber.setSelectedItem(modelo);
+								textFieldSerial.setText(novoSerial);
+								dateChooser.setDate(rs.getDate("dataEnvio"));
+								comboBoxAlmox.setSelectedItem(rs.getString("almoxPlaca"));
+								comboBoxEnviado.setSelectedItem("Selecione Cidade");
+								comboBoxUtilizado.setSelectedItem("Selecione Cidade");
+								textArea.setText(rs.getString("observacoes"));										
+								
+								
+							}//Fim da condição caso o status seja Almox
+							else
+							//Início da condição caso o status seja Filial
+							if("Filial".equals(status)){
+								
+								if("TX".equals(tecnica)){
+									rdbtnTX.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("CX".equals(tecnica)){
+									rdbtnCx.setSelected(true);
+									rdbtnTX.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("DADOS".equals(tecnica)){
+									rdbtnDados.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnTX.setSelected(false);
+								}
+								
+								rdbtnOutraFilial.setSelected(true);
+								comboBoxPartNumber.setSelectedItem(modelo);
+								textFieldSerial.setText(novoSerial);
+								dateChooser.setDate(rs.getDate("dataEnvio"));
+								comboBoxEnviado.setSelectedItem(cidade);
+								textArea.setText(rs.getString("observacoes"));										
+								
+							}//Fim da condição caso o status seja Filial
+							else if("Reparo".equals(status)){
+								
+								if("TX".equals(tecnica)){
+									rdbtnTX.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("CX".equals(tecnica)){
+									rdbtnCx.setSelected(true);
+									rdbtnTX.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("DADOS".equals(tecnica)){
+									rdbtnDados.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnTX.setSelected(false);
+								}
+								
+								rdbtnEnvioPReparo.setSelected(true);
+								comboBoxEnviado.setSelectedItem(cidade);
+								textArea.setText(rs.getString("observacoes"));
+								textFieldSerial.setText(novoSerial);
+								comboBoxPartNumber.setSelectedItem(modelo);
+								dateChooser.setDate(rs.getDate("dataEnvio"));
+								
+								
+							}//Fim da condição caso o status seja Reparo
+							else if("Planta".equals(status)){
+								
+								if("TX".equals(tecnica)){
+									rdbtnTX.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("CX".equals(tecnica)){
+									rdbtnCx.setSelected(true);
+									rdbtnTX.setSelected(false);
+									rdbtnDados.setSelected(false);
+								}else if("DADOS".equals(tecnica)){
+									rdbtnDados.setSelected(true);
+									rdbtnCx.setSelected(false);
+									rdbtnTX.setSelected(false);
+								}
+								
+								comboBoxUtilizado.setSelectedItem(cidade);
+								textArea.setText(rs.getString("observacoes"));
+								comboBoxPartNumber.setSelectedItem(modelo);
+								rdbtnPlantaInterna.setSelected(true);
+								textFieldSerial.setText(novoSerial);
+	
+	
+							}//Fim da condição caso o status seja Planta
+							}//Fim do while
+						}catch(SQLException e){
+							
+						}								
+				}				
+		
+	
+		
+		
+		
+	}//Fim do método de receber o serial da placa
+	
 	
 
 	/**
@@ -177,7 +340,7 @@ public class TelaPlaca extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton buttonSalvar = new JButton("");
+		buttonSalvar = new JButton("");
 		buttonSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -1066,6 +1229,10 @@ public class TelaPlaca extends JFrame {
 		buttonPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				String serial = JOptionPane.showInputDialog("Informe o Serial da Placa");
+				recebeSerial(serial);
+				
+				/*
 				boolean verifica;
 				ResultSet rs = null;
 				ResultSet RS = null;
@@ -1222,7 +1389,7 @@ public class TelaPlaca extends JFrame {
 								}								
 						}				
 				}
-			}
+			*/}
 		});
 		buttonPesquisar.setToolTipText("Pesquisar");
 		buttonPesquisar.setIcon(new ImageIcon(TelaPlaca.class.getResource("/imagens/mltech/Pesquisar.png")));
