@@ -47,6 +47,7 @@ public class TelaMostraPlacas extends JFrame {
 	private JRadioButton rdbtnReparo;
 	private JComboBox comboBoxModelo;
 	public String novoComentario;
+	private JRadioButton rdbtnEnviadoPara;
 
 	/**
 	 * Launch the application.
@@ -133,6 +134,55 @@ public class TelaMostraPlacas extends JFrame {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 	}
+	
+	public void preencherTabelaEnvio(String sql){
+		
+		int indiceCidade = 0;
+		String nomeCidade = null;
+		ResultSet rs = null;
+		ResultSet RS = null;
+		ArrayList dados = new ArrayList();
+		String[] colunas = new String[]{"Modelo","Serial","Enviado Para"};
+		
+		
+		try{
+			ConectaBanco conecta = new ConectaBanco();
+			conecta.conectaBanco();
+			
+			rs = conecta.stm.executeQuery(sql);
+			
+			
+			
+			while(rs.next()){	
+				indiceCidade = rs.getInt("cidade");
+				
+				String buscaCidade = "select * from cidade where idcidade='"+indiceCidade+"'";
+				RS = conecta.stm.executeQuery(buscaCidade);			
+				
+				while(RS.next()){				
+				dados.add(new Object[]{(String)comboBoxModelo.getSelectedItem(),rs.getString("serialPlaca"),RS.getString("cidadeNome")});
+				}
+			};
+			
+		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
+		ModeloTabela modelo = new ModeloTabela(dados, colunas);
+		table.setModel(modelo);
+		table.getColumnModel().getColumn(0).setPreferredWidth(209);
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(209);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(209);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		
+		
+	}//Fim do método preecnherTabelaEnvio
 
 	/**
 	 * Create the frame.
@@ -190,6 +240,7 @@ public class TelaMostraPlacas extends JFrame {
 				if(rdbtnFilial.isSelected()){
 					rdbtnPlantaInterna.setSelected(false);
 					rdbtnReparo.setSelected(false);
+					rdbtnEnviadoPara.setSelected(false);
 				}
 			}
 		});
@@ -202,6 +253,7 @@ public class TelaMostraPlacas extends JFrame {
 				if(rdbtnPlantaInterna.isSelected()){
 					rdbtnFilial.setSelected(false);
 					rdbtnReparo.setSelected(false);
+					rdbtnEnviadoPara.setSelected(false);
 				}
 			}
 		});
@@ -214,11 +266,25 @@ public class TelaMostraPlacas extends JFrame {
 				if(rdbtnReparo.isSelected()){
 					rdbtnFilial.setSelected(false);
 					rdbtnPlantaInterna.setSelected(false);
+					rdbtnEnviadoPara.setSelected(false);
 				}
 			}
 		});
 		rdbtnReparo.setBounds(250, 24, 94, 25);
 		panel_1.add(rdbtnReparo);
+		
+		rdbtnEnviadoPara = new JRadioButton("Enviado Para");
+		rdbtnEnviadoPara.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(rdbtnEnviadoPara.isSelected()){
+					rdbtnFilial.setSelected(false);
+					rdbtnPlantaInterna.setSelected(false);
+					rdbtnReparo.setSelected(false);
+				}
+			}
+		});
+		rdbtnEnviadoPara.setBounds(348, 24, 127, 25);
+		panel_1.add(rdbtnEnviadoPara);
 		
 		JLabel lblModeloDePlaca = new JLabel("Modelo de Placa");
 		lblModeloDePlaca.setBounds(218, 101, 107, 16);
@@ -365,7 +431,7 @@ public class TelaMostraPlacas extends JFrame {
 				ConectaBanco conecta = new ConectaBanco();
 				
 				//Verifica se botão foi clicado sem nenhuma opção selecionada
-				if((!(rdbtnFilial.isSelected()))&&(!(rdbtnPlantaInterna.isSelected()))&&(!(rdbtnReparo.isSelected()))){
+				if((!(rdbtnFilial.isSelected()))&&(!(rdbtnPlantaInterna.isSelected()))&&(!(rdbtnReparo.isSelected()))&&(!(rdbtnEnviadoPara.isSelected()))){
 					JOptionPane.showMessageDialog(null, "Selecione Uma das Opções Em \"Busca Por:\"");
 				}else{
 						if(rdbtnFilial.isSelected()){
@@ -404,11 +470,11 @@ public class TelaMostraPlacas extends JFrame {
 								JOptionPane.showMessageDialog(null, e);
 							}						
 							
-						}else{
+						}else if(rdbtnReparo.isSelected()){
 							String reparo = "Reparo";
 							
 							try{
-								String buscaIndicePlaca = "select * from modeloplaca where partNumbermodelo='"+modeloPlaca+"'";
+								String buscaIndicePlaca = "select * from modeloplaca where partNumberModelo='"+modeloPlaca+"'";
 								rs = conecta.stm.executeQuery(buscaIndicePlaca);
 								
 								while(rs.next()){
@@ -422,8 +488,25 @@ public class TelaMostraPlacas extends JFrame {
 							}
 							
 							
-						}
-					
+						}else{
+							String statusPlaca = "Filial";
+							
+							try{
+								String buscaIndicePlaca = "select * from modeloplaca where partNumberModelo='"+modeloPlaca+"'";
+								rs = conecta.stm.executeQuery(buscaIndicePlaca);
+								
+								while(rs.next()){
+									indiceTX = rs.getInt("idModelo");
+								}
+								
+								preencherTabelaEnvio("select * from placa where modelo='"+indiceTX+"' and statusPlaca='"+statusPlaca+"'");
+								
+								
+							}catch(SQLException e){
+								JOptionPane.showMessageDialog(null, e);
+							}							
+							
+						}					
 				}
 			}
 		});
