@@ -149,9 +149,7 @@ public class TelaMostraPlacas extends JFrame {
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();
 			
-			rs = conecta.stm.executeQuery(sql);
-			
-			
+			rs = conecta.stm.executeQuery(sql);			
 			
 			while(rs.next()){	
 				indiceCidade = rs.getInt("cidade");
@@ -178,9 +176,7 @@ public class TelaMostraPlacas extends JFrame {
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setAutoResizeMode(table.AUTO_RESIZE_OFF);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
-		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
 		
 	}//Fim do método preecnherTabelaEnvio
 
