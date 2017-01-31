@@ -36,6 +36,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 
 public class TelaCadastroCircuito extends JFrame {
 
@@ -98,6 +99,7 @@ public class TelaCadastroCircuito extends JFrame {
 	private JComboBox comboBoxEstacaoSDHB;
 	private JRadioButton rdbtnAtivo;
 	private JRadioButton rdbtnDesativado;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -926,9 +928,12 @@ public class TelaCadastroCircuito extends JFrame {
 		chckbxPdh_1.setBounds(76, 186, 61, 23);
 		panel.add(chckbxPdh_1);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 247, 254, 135);
+		panel.add(scrollPane);
+		
 		textArea = new JTextArea();
-		textArea.setBounds(10, 247, 254, 135);
-		panel.add(textArea);
+		scrollPane.setViewportView(textArea);
 		
 		JLabel lblCliente = new JLabel("Cliente");
 		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -2007,7 +2012,7 @@ public class TelaCadastroCircuito extends JFrame {
 							novoCircuito.setNumeroCircuito(textFieldCircuito.getText());
 							novoCircuito.setObervacoes(textArea.getText());
 							novoCircuito.setCidadeA(indiceCidadeA);
-							novoCircuito.setEquipamentoPDHA(comboBoxPDHA.getSelectedIndex()+1);
+							novoCircuito.setEquipamentoPDHA(comboBoxPDHA.getSelectedIndex());
 							novoCircuito.setPortaA(textFieldPortaPDHA.getText());
 							novoCircuito.setDidA(textFieldDidPDHA.getText());
 							novoCircuito.setEquipamentoSDHB(indexSDHB);

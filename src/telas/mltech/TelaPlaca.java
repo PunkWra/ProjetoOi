@@ -51,6 +51,7 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JScrollPane;
 
 public class TelaPlaca extends JFrame {
 
@@ -1221,9 +1222,14 @@ public class TelaPlaca extends JFrame {
 		lblObservaes.setBounds(10, 282, 78, 14);
 		contentPane.add(lblObservaes);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 296, 575, 121);
+		contentPane.add(scrollPane);
+		
 		textArea = new JTextArea();
-		textArea.setBounds(10, 296, 575, 121);
-		contentPane.add(textArea);
+		scrollPane.setViewportView(textArea);
+		
+		textArea.setEditable(false);
 		
 		JButton buttonPesquisar = new JButton("");
 		buttonPesquisar.addActionListener(new ActionListener() {
@@ -1771,8 +1777,6 @@ public class TelaPlaca extends JFrame {
 		comboBoxAlmox.setModel(new DefaultComboBoxModel(new String[] {"Selecione o Almox", "Caxias do Sul", "Cruz Alta", "Erechim", "Palmeira das Miss\u00F5es", "Passo Fundo", "Pelotas", "Porto Alegre", "Santa Maria", "Santo \u00C2ngelo", "Uruguaiana"}));
 		comboBoxAlmox.setBounds(10, 244, 166, 20);
 		contentPane.add(comboBoxAlmox);
-		
-		textArea.setEditable(false);
 		
 		JButton btnNovo = new JButton("");
 		btnNovo.setToolTipText("Inserir Informa\u00E7\u00F5es");
