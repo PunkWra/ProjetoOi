@@ -229,6 +229,7 @@ public class TelaCadastroCircuito extends JFrame {
 				buttonAtualizar.setEnabled(true);
 				ResultSet rs = null;
 				ResultSet RS = null;
+				ResultSet RS1 = null;
 				String statusA = null;
 				String statusB = null;
 				String statusCircuito = null;
@@ -258,14 +259,14 @@ public class TelaCadastroCircuito extends JFrame {
 						panel_3.setVisible(false);
 						panel_4.setVisible(false);	
 						chckbxSdh.setSelected(true);
-						chckbxSdh_1.setSelected(true);
-						
+						chckbxSdh_1.setSelected(true);						
 													
 							String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
 							RS = conecta.stm.executeQuery(buscaSDH);
 							
 							while(RS.next()){
 								sdhA = RS.getString("sdhNome");
+								break;
 							}
 							
 							String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
@@ -273,6 +274,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								sdhB = RS.getString("sdhNome");
+								break;
 							}	
 							
 							String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
@@ -280,6 +282,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeA = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
@@ -287,6 +290,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								estacaoA = RS.getString("estacaoSigla");
+								break;
 							}
 							
 							String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -294,6 +298,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeB = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
@@ -301,31 +306,32 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								estacaoB = RS.getString("estacaoSigla");
+								break;
 							}
 						
 						//Carregando dados da ponta A SDH
 						textFieldCliente.setText(rs.getString("cliente"));
-						textArea.setText(rs.getString("observacoesCircuito"));
-						comboBoxSDHA.setSelectedItem(sdhA);
+						textArea.setText(rs.getString("observacoesCircuito"));						
 						textFieldSlotSDHA.setText(rs.getString("slotA"));
 						comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
 						textFieldDidSDHA.setText(rs.getString("didA"));		
 						comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 						comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+						comboBoxSDHA.setSelectedItem(sdhA);
 						if(statusCircuito.equals("ativo")){
 							rdbtnAtivo.setSelected(true);
 						}else{
 							rdbtnDesativado.setSelected(true);
 						}
 						
-						
-						//Carregando dados da ponta B SDH
-						comboBoxSDHB.setSelectedItem(sdhB);
+						//Carregando dados da ponta B SDH						
 						textFieldSlotSDHB.setText(rs.getString("slotB"));
 						comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
 						textFieldDidSDHB.setText(rs.getString("didB"));
 						comboBoxCidadeSDHB.setSelectedItem(cidadeB);
 						comboBoxEstacaoSDHB.setSelectedItem(estacaoB);
+						comboBoxSDHB.setSelectedItem(sdhB);
+						
 						
 					}else if(("s".equals(rs.getString("statusA")))&&("pB".equals(rs.getString("statusB")))){
 						panel_1.setVisible(true);
@@ -340,6 +346,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							sdhA = RS.getString("sdhNome");
+							break;
 						}
 						
 						String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -347,6 +354,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							cidadeB = RS.getString("cidadeNome");
+							break;
 						}
 						
 						String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
@@ -354,6 +362,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							pdhB = RS.getString("modeloRadio");
+							break;
 						}
 						
 						String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
@@ -361,6 +370,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							cidadeA = RS.getString("cidadeNome");
+							break;
 						}
 						
 						String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
@@ -368,17 +378,18 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							estacaoA = RS.getString("estacaoSigla");
+							break;
 						}
 						
 						//Carregando dados da ponta A SDH
 						textFieldCliente.setText(rs.getString("cliente"));
-						textArea.setText(rs.getString("observacoesCircuito"));
-						comboBoxSDHA.setSelectedItem(sdhA);
+						textArea.setText(rs.getString("observacoesCircuito"));						
 						textFieldSlotSDHA.setText(rs.getString("slotA"));
 						comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
 						textFieldDidSDHA.setText(rs.getString("didA"));	
 						comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 						comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+						comboBoxSDHA.setSelectedItem(sdhA);
 						if(statusCircuito.equals("ativo")){
 							rdbtnAtivo.setSelected(true);
 						}else{
@@ -404,6 +415,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							cidadeA = RS.getString("cidadeNome");
+							break;
 						}
 						
 						String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
@@ -411,6 +423,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							pdhA = RS.getString("modeloRadio");
+							break;
 						}						
 						
 						String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -418,6 +431,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							cidadeB = RS.getString("cidadeNome");
+							break;
 						}
 						
 						String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
@@ -425,6 +439,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							pdhB = RS.getString("modeloRadio");
+							break;
 						}						
 						
 						//Carrega dados ponta A PDH
@@ -459,6 +474,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							cidadeA = RS.getString("cidadeNome");
+							break;
 						}
 						
 						String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
@@ -466,6 +482,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							pdhA = RS.getString("modeloRadio");
+							break;
 						}		
 						
 						String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
@@ -473,6 +490,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							sdhB = RS.getString("sdhNome");
+							break;
 						}
 						
 						String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -480,6 +498,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							cidadeB = RS.getString("cidadeNome");
+							break;
 						}
 						
 						String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
@@ -487,6 +506,7 @@ public class TelaCadastroCircuito extends JFrame {
 						
 						while(RS.next()){
 							estacaoB = RS.getString("estacaoSigla");
+							break;
 						}
 						
 						//Carrega dados ponta A PDH
@@ -502,13 +522,13 @@ public class TelaCadastroCircuito extends JFrame {
 							rdbtnDesativado.setSelected(true);
 						}
 						
-						//Carrega dados ponta B SDH
-						comboBoxSDHB.setSelectedItem(sdhB);
+						//Carrega dados ponta B SDH						
 						textFieldSlotSDHB.setText(rs.getString("slotB"));
 						comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
 						textFieldDidSDHB.setText(rs.getString("didB"));
 						comboBoxCidadeSDHB.setSelectedItem(cidadeB);
 						comboBoxEstacaoSDHB.setSelectedItem(estacaoB);
+						comboBoxSDHB.setSelectedItem(sdhB);						
 												
 					}											
 					
@@ -562,6 +582,7 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									sdhA = RS.getString("sdhNome");
+									break;
 								}
 								
 								String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
@@ -569,6 +590,7 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									sdhB = RS.getString("sdhNome");
+									break;
 								}
 								
 								String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
@@ -576,6 +598,7 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									cidadeA = RS.getString("cidadeNome");
+									break;
 								}
 								
 								String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
@@ -583,6 +606,7 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									estacaoA = RS.getString("estacaoSigla");
+									break;
 								}
 								
 								String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -590,6 +614,7 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									cidadeB = RS.getString("cidadeNome");
+									break;
 								}
 								
 								String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
@@ -597,31 +622,32 @@ public class TelaCadastroCircuito extends JFrame {
 								
 								while(RS.next()){
 									estacaoB = RS.getString("estacaoSigla");
+									break;
 								}								
 							
 							//Carregando dados da ponta A SDH
 							textFieldCliente.setText(rs.getString("cliente"));
-							textArea.setText(rs.getString("observacoesCircuito"));
-							comboBoxSDHA.setSelectedItem(sdhA);
+							textArea.setText(rs.getString("observacoesCircuito"));							
 							comboBoxCabeceira.setSelectedItem(rs.getString("cabeceira"));
 							textFieldSlotSDHA.setText(rs.getString("slotA"));
 							comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
 							textFieldDidSDHA.setText(rs.getString("didA"));	
 							comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);	
+							comboBoxSDHA.setSelectedItem(sdhA);
 							if(statusCircuito.equals("ativo")){
 								rdbtnAtivo.setSelected(true);
 							}else{
 								rdbtnDesativado.setSelected(true);
 							}
 							
-							//Carregando dados da ponta B SDH
-							comboBoxSDHB.setSelectedItem(sdhB);
+							//Carregando dados da ponta B SDH							
 							textFieldSlotSDHB.setText(rs.getString("slotB"));
 							comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
 							textFieldDidSDHB.setText(rs.getString("didB"));
 							comboBoxCidadeSDHB.setSelectedItem(cidadeB);
 							comboBoxEstacaoSDHB.setSelectedItem(estacaoB);
+							comboBoxSDHB.setSelectedItem(sdhB);
 							
 							
 						}else if(("s".equals(rs.getString("statusA")))&&("pB".equals(rs.getString("statusB")))){
@@ -637,6 +663,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								sdhA = RS.getString("sdhNome");
+								break;
 							}
 							
 							String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -644,6 +671,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeB = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
@@ -651,6 +679,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								pdhB = RS.getString("modeloRadio");
+								break;
 							}
 							
 							String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
@@ -658,6 +687,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeA = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
@@ -665,18 +695,19 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								estacaoA = RS.getString("estacaoSigla");
+								break;
 							}
 							
 							//Carregando dados da ponta A SDH
 							textFieldCliente.setText(rs.getString("cliente"));
 							comboBoxCabeceira.setSelectedItem(rs.getString("cabeceira"));
-							textArea.setText(rs.getString("observacoesCircuito"));
-							comboBoxSDHA.setSelectedItem(sdhA);
+							textArea.setText(rs.getString("observacoesCircuito"));							
 							textFieldSlotSDHA.setText(rs.getString("slotA"));
 							comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
 							textFieldDidSDHA.setText(rs.getString("didA"));	
 							comboBoxCidadeSDHA.setSelectedItem(cidadeA);
 							comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+							comboBoxSDHA.setSelectedItem(sdhA);
 							if(statusCircuito.equals("ativo")){
 								rdbtnAtivo.setSelected(true);
 							}else{
@@ -702,6 +733,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeA = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
@@ -709,6 +741,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								pdhA = RS.getString("modeloRadio");
+								break;
 							}						
 							
 							String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -716,6 +749,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeB = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
@@ -723,6 +757,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								pdhB = RS.getString("modeloRadio");
+								break;
 							}							
 							
 							//Carrega dados ponta A PDH
@@ -759,6 +794,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeA = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
@@ -766,6 +802,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								pdhA = RS.getString("modeloRadio");
+								break;
 							}		
 							
 							String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
@@ -773,6 +810,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								sdhB = RS.getString("sdhNome");
+								break;
 							}
 							
 							String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
@@ -780,6 +818,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								cidadeB = RS.getString("cidadeNome");
+								break;
 							}
 							
 							String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
@@ -787,6 +826,7 @@ public class TelaCadastroCircuito extends JFrame {
 							
 							while(RS.next()){
 								estacaoB = RS.getString("estacaoSigla");
+								break;
 							}
 							
 							//Carrega dados ponta A PDH
@@ -803,17 +843,18 @@ public class TelaCadastroCircuito extends JFrame {
 								rdbtnDesativado.setSelected(true);
 							}
 							
-							//Carrega dados ponta B SDH
-							comboBoxSDHB.setSelectedItem(sdhB);
+							//Carrega dados ponta B SDH							
 							textFieldSlotSDHB.setText(rs.getString("slotB"));
 							comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
 							textFieldDidSDHB.setText(rs.getString("didB"));
 							comboBoxCidadeSDHB.setSelectedItem(cidadeB);
-							comboBoxEstacaoSDHB.setSelectedItem(estacaoB);												
+							comboBoxEstacaoSDHB.setSelectedItem(estacaoB);	
+							comboBoxSDHB.setSelectedItem(sdhB);
 						}											
 						
 					}catch(SQLException ev){
 						JOptionPane.showMessageDialog(null, "Não Há Circuito Para Essa LTG Na Cabeceira Selecionada");
+						
 						textFieldCircuito.setText("");
 					}					
 				}//Fim do segundo else
@@ -1149,49 +1190,6 @@ public class TelaCadastroCircuito extends JFrame {
 		layeredPane_1.setBounds(284, 214, 365, 210);
 		contentPane.add(layeredPane_1);
 		
-		panel_4 = new JPanel();
-		panel_4.setBorder(new TitledBorder(null, "Ponta B PDH", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
-		panel_4.setBounds(0, 0, 365, 210);
-		layeredPane_1.add(panel_4);
-		panel_4.setLayout(null);
-		
-		JLabel lblLocalidade_1 = new JLabel("Localidade");
-		lblLocalidade_1.setBounds(10, 25, 78, 14);
-		panel_4.add(lblLocalidade_1);
-		
-		comboBoxCidadeB = new JComboBox();
-		comboBoxCidadeB.setModel(new DefaultComboBoxModel(new String[] {""}));
-		comboBoxCidadeB.setBounds(10, 42, 199, 20);
-		panel_4.add(comboBoxCidadeB);
-		
-		JLabel lblEquipamento_3 = new JLabel("Equipamento");
-		lblEquipamento_3.setBounds(219, 25, 78, 14);
-		panel_4.add(lblEquipamento_3);
-		
-		comboBoxPDHB = new JComboBox();
-		comboBoxPDHB.setModel(new DefaultComboBoxModel(new String[] {""}));
-		comboBoxPDHB.setBounds(219, 42, 95, 20);
-		panel_4.add(comboBoxPDHB);
-		
-		JLabel lblPorta_3 = new JLabel("Porta");
-		lblPorta_3.setBounds(10, 89, 46, 14);
-		panel_4.add(lblPorta_3);
-		
-		textFieldPortaPDHB = new JTextField();
-		textFieldPortaPDHB.setBounds(10, 105, 86, 20);
-		panel_4.add(textFieldPortaPDHB);
-		textFieldPortaPDHB.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("DID");
-		lblNewLabel_1.setBounds(115, 89, 46, 14);
-		panel_4.add(lblNewLabel_1);
-		
-		textFieldDidPDHB = new JTextField();
-		textFieldDidPDHB.setBounds(113, 105, 86, 20);
-		panel_4.add(textFieldDidPDHB);
-		textFieldDidPDHB.setColumns(10);
-		panel_4.setVisible(false);
-		
 		panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Ponta B SDH", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 		panel_2.setBounds(0, 0, 365, 210);
@@ -1314,6 +1312,49 @@ public class TelaCadastroCircuito extends JFrame {
 		comboBoxEstacaoSDHB.setBounds(237, 44, 88, 20);
 		panel_2.add(comboBoxEstacaoSDHB);
 		panel_2.setVisible(false);
+		
+		panel_4 = new JPanel();
+		panel_4.setBorder(new TitledBorder(null, "Ponta B PDH", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		panel_4.setBounds(0, 0, 365, 210);
+		layeredPane_1.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JLabel lblLocalidade_1 = new JLabel("Localidade");
+		lblLocalidade_1.setBounds(10, 25, 78, 14);
+		panel_4.add(lblLocalidade_1);
+		
+		comboBoxCidadeB = new JComboBox();
+		comboBoxCidadeB.setModel(new DefaultComboBoxModel(new String[] {""}));
+		comboBoxCidadeB.setBounds(10, 42, 199, 20);
+		panel_4.add(comboBoxCidadeB);
+		
+		JLabel lblEquipamento_3 = new JLabel("Equipamento");
+		lblEquipamento_3.setBounds(219, 25, 78, 14);
+		panel_4.add(lblEquipamento_3);
+		
+		comboBoxPDHB = new JComboBox();
+		comboBoxPDHB.setModel(new DefaultComboBoxModel(new String[] {""}));
+		comboBoxPDHB.setBounds(219, 42, 95, 20);
+		panel_4.add(comboBoxPDHB);
+		
+		JLabel lblPorta_3 = new JLabel("Porta");
+		lblPorta_3.setBounds(10, 89, 46, 14);
+		panel_4.add(lblPorta_3);
+		
+		textFieldPortaPDHB = new JTextField();
+		textFieldPortaPDHB.setBounds(10, 105, 86, 20);
+		panel_4.add(textFieldPortaPDHB);
+		textFieldPortaPDHB.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("DID");
+		lblNewLabel_1.setBounds(115, 89, 46, 14);
+		panel_4.add(lblNewLabel_1);
+		
+		textFieldDidPDHB = new JTextField();
+		textFieldDidPDHB.setBounds(113, 105, 86, 20);
+		panel_4.add(textFieldDidPDHB);
+		textFieldDidPDHB.setColumns(10);
+		panel_4.setVisible(false);
 		
 		buttonSalvar = new JButton("");
 		buttonSalvar.addActionListener(new ActionListener() {
