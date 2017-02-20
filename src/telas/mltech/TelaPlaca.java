@@ -381,7 +381,7 @@ public class TelaPlaca extends JFrame {
 							
 							//Lógica caso a placa já esteja cadastrada
 								if(verifica==true){
-									//JOptionPane.showMessageDialog(null, "Placa Já Cadastrada");
+									JOptionPane.showMessageDialog(null, "Placa Já Cadastrada");
 									buttonSalvar.setEnabled(false);
 									try{
 										ConectaBanco conecta = new ConectaBanco();
@@ -957,6 +957,7 @@ public class TelaPlaca extends JFrame {
 		contentPane.add(lblPartnumber);
 		
 		comboBoxPartNumber = new JComboBox();
+		comboBoxPartNumber.setModel(new DefaultComboBoxModel(new String[] {"Selecione Modelo"}));
 		comboBoxPartNumber.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
@@ -982,7 +983,6 @@ public class TelaPlaca extends JFrame {
 				
 			}
 		});
-		comboBoxPartNumber.setModel(new DefaultComboBoxModel(new String[] {"Selecione Modelo"}));
 		comboBoxPartNumber.setBounds(145, 135, 146, 20);
 		contentPane.add(comboBoxPartNumber);
 		
