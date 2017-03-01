@@ -296,9 +296,6 @@ public class TelaPlaca extends JFrame {
 						}								
 				}				
 		
-	
-		
-		
 		
 	}//Fim do método de receber o serial da placa
 	

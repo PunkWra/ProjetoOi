@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import classes.mltech.ConectaBanco;
 import classes.mltech.ModeloTabela;
@@ -27,6 +28,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaMostraCircuito extends JFrame {
 
@@ -346,6 +349,18 @@ public void buscaCidade(){
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int index = table.getSelectedRow();
+				TableModel model = table.getModel();
+				String numeroCircuito = model.getValueAt(index, 0).toString();
+				TelaCadastroCircuito nova = new TelaCadastroCircuito();
+				nova.recebeCircuito(numeroCircuito);
+				nova.setVisible(true);
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {

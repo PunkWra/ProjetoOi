@@ -100,6 +100,13 @@ public class TelaCadastroCircuito extends JFrame {
 	private JRadioButton rdbtnAtivo;
 	private JRadioButton rdbtnDesativado;
 	private JScrollPane scrollPane;
+	private ResultSet rs = null;
+	private ResultSet RS = null;
+	private ResultSet RS1 = null;
+	private String statusA = null;
+	private String statusB = null;
+	private String statusCircuito = null;
+	private String nomeCabeceira;
 
 	/**
 	 * Launch the application.
@@ -162,6 +169,658 @@ public class TelaCadastroCircuito extends JFrame {
 		}		
 	}//fim do método de buscar Rádios
 	
+	public void recebeCircuito(String numeroCircuito){
+		
+		String circuitoDesejado = numeroCircuito;
+		
+		try{		
+		ConectaBanco conexao = new ConectaBanco();
+		conexao.conectaBanco();
+		
+		Circuito novoCircuito = new Circuito();			
+		
+		String buscaCabeceira = "select * from circuito where circuitoNumero='"+circuitoDesejado+"'";
+		rs = conexao.stm.executeQuery(buscaCabeceira);
+		
+		while(rs.next()){
+			nomeCabeceira = rs.getString("cabeceira");
+		}
+		}catch(SQLException e){
+			
+		}
+		 if(nomeCabeceira==""){
+			
+		textFieldCircuito.setText(circuitoDesejado);
+		buttonSalvar.setEnabled(false);
+		buttonAtualizar.setEnabled(true);
+		
+		try{
+			ConectaBanco conecta = new ConectaBanco();
+			conecta.conectaBanco();					
+			
+			String buscaStatus = "select * from circuito where circuitoNumero = '"+circuitoDesejado+"' and cabeceira = ' '";
+			rs = conecta.stm.executeQuery(buscaStatus);
+		
+			if(rs.next()){
+				statusA = rs.getString("statusA");
+				statusB = rs.getString("statusB");
+				indexSDHA = rs.getInt("codSdhA");
+				indexSDHB = rs.getInt("codSdhB");
+				indexPdhA = rs.getInt("codPdhA");
+				indexPdhB = rs.getInt("codPdhB");
+				indexCidadeA = rs.getInt("codCidadeA");
+				indexCidadeB = rs.getInt("codCidadeB");
+				indexEstacaoA = rs.getInt("codEstacaoA");
+				indexEstacaoB = rs.getInt("codEstacaoB");
+				statusCircuito = rs.getString("statusCircuito");
+			}
+			if(("s".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
+				panel_1.setVisible(true);
+				panel_2.setVisible(true);
+				panel_3.setVisible(false);
+				panel_4.setVisible(false);	
+				chckbxSdh.setSelected(true);
+				chckbxSdh_1.setSelected(true);						
+											
+					String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
+					RS = conecta.stm.executeQuery(buscaSDH);
+					
+					while(RS.next()){
+						sdhA = RS.getString("sdhNome");
+						break;
+					}
+					
+					String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
+					RS = conecta.stm.executeQuery(nomeSdhB);
+					
+					while(RS.next()){
+						sdhB = RS.getString("sdhNome");
+						break;
+					}	
+					
+					String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
+					RS = conecta.stm.executeQuery(nomeCidade);
+					
+					while(RS.next()){
+						cidadeA = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
+					RS = conecta.stm.executeQuery(buscaEstacaoA);
+					
+					while(RS.next()){
+						estacaoA = RS.getString("estacaoSigla");
+						break;
+					}
+					
+					String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+					RS = conecta.stm.executeQuery(nomeCidadeB);
+					
+					while(RS.next()){
+						cidadeB = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
+					RS = conecta.stm.executeQuery(buscaEstacaoB);
+					
+					while(RS.next()){
+						estacaoB = RS.getString("estacaoSigla");
+						break;
+					}
+				
+				//Carregando dados da ponta A SDH
+				textFieldCliente.setText(rs.getString("cliente"));
+				textArea.setText(rs.getString("observacoesCircuito"));						
+				textFieldSlotSDHA.setText(rs.getString("slotA"));
+				comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
+				textFieldDidSDHA.setText(rs.getString("didA"));		
+				comboBoxCidadeSDHA.setSelectedItem(cidadeA);
+				comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+				comboBoxSDHA.setSelectedItem(sdhA);
+				if(statusCircuito.equals("ativo")){
+					rdbtnAtivo.setSelected(true);
+				}else{
+					rdbtnDesativado.setSelected(true);
+				}
+				
+				//Carregando dados da ponta B SDH						
+				textFieldSlotSDHB.setText(rs.getString("slotB"));
+				comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
+				textFieldDidSDHB.setText(rs.getString("didB"));
+				comboBoxCidadeSDHB.setSelectedItem(cidadeB);
+				comboBoxEstacaoSDHB.setSelectedItem(estacaoB);
+				comboBoxSDHB.setSelectedItem(sdhB);
+				
+				
+			}else if(("s".equals(rs.getString("statusA")))&&("pB".equals(rs.getString("statusB")))){
+				panel_1.setVisible(true);
+				panel_4.setVisible(true);
+				panel_2.setVisible(false);
+				panel_3.setVisible(false);
+				chckbxSdh.setSelected(true);
+				chckbxPdh_1.setSelected(true);
+				
+				String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
+				RS = conecta.stm.executeQuery(buscaSDH);
+				
+				while(RS.next()){
+					sdhA = RS.getString("sdhNome");
+					break;
+				}
+				
+				String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+				RS = conecta.stm.executeQuery(buscaCidadeB);
+				
+				while(RS.next()){
+					cidadeB = RS.getString("cidadeNome");
+					break;
+				}
+				
+				String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
+				RS = conecta.stm.executeQuery(buscaPdhB);
+				
+				while(RS.next()){
+					pdhB = RS.getString("modeloRadio");
+					break;
+				}
+				
+				String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
+				RS = conecta.stm.executeQuery(nomeCidade);
+				
+				while(RS.next()){
+					cidadeA = RS.getString("cidadeNome");
+					break;
+				}
+				
+				String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
+				RS = conecta.stm.executeQuery(buscaEstacaoA);
+				
+				while(RS.next()){
+					estacaoA = RS.getString("estacaoSigla");
+					break;
+				}
+				
+				//Carregando dados da ponta A SDH
+				textFieldCliente.setText(rs.getString("cliente"));
+				textArea.setText(rs.getString("observacoesCircuito"));						
+				textFieldSlotSDHA.setText(rs.getString("slotA"));
+				comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
+				textFieldDidSDHA.setText(rs.getString("didA"));	
+				comboBoxCidadeSDHA.setSelectedItem(cidadeA);
+				comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+				comboBoxSDHA.setSelectedItem(sdhA);
+				if(statusCircuito.equals("ativo")){
+					rdbtnAtivo.setSelected(true);
+				}else{
+					rdbtnDesativado.setSelected(true);
+				}
+				
+				//Carrega dados da ponta B PDH
+				comboBoxCidadeB.setSelectedItem(cidadeB);
+				comboBoxPDHB.setSelectedItem(pdhB);
+				textFieldPortaPDHB.setText(rs.getString("portaB"));
+				textFieldDidPDHB.setText(rs.getString("didB"));
+				
+			}else if(("p".equals(rs.getString("statusA")))&&("pB".equals(rs.getString("statusB")))){
+				panel_3.setVisible(true);
+				panel_4.setVisible(true);
+				panel_1.setVisible(false);
+				panel_2.setVisible(false);
+				chckbxPdh.setSelected(true);
+				chckbxPdh_1.setSelected(true);
+				
+				String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
+				RS = conecta.stm.executeQuery(buscaCidadeA);
+				
+				while(RS.next()){
+					cidadeA = RS.getString("cidadeNome");
+					break;
+				}
+				
+				String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
+				RS = conecta.stm.executeQuery(buscaPdhA);
+				
+				while(RS.next()){
+					pdhA = RS.getString("modeloRadio");
+					break;
+				}						
+				
+				String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+				RS = conecta.stm.executeQuery(buscaCidadeB);
+				
+				while(RS.next()){
+					cidadeB = RS.getString("cidadeNome");
+					break;
+				}
+				
+				String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
+				RS = conecta.stm.executeQuery(buscaPdhB);
+				
+				while(RS.next()){
+					pdhB = RS.getString("modeloRadio");
+					break;
+				}						
+				
+				//Carrega dados ponta A PDH
+				textArea.setText(rs.getString("observacoesCircuito"));
+				textFieldCliente.setText(rs.getString("cliente"));
+				comboBoxCidadeA.setSelectedItem(cidadeA);
+				comboBoxPDHA.setSelectedItem(pdhA);
+				textFieldPortaPDHA.setText(rs.getString("portaA"));
+				textFieldDidPDHA.setText(rs.getString("didA"));
+				if(statusCircuito.equals("ativo")){
+					rdbtnAtivo.setSelected(true);
+				}else{
+					rdbtnDesativado.setSelected(true);
+				}
+				
+				//Carrega dados da ponta B PDH
+				comboBoxCidadeB.setSelectedItem(cidadeB);
+				comboBoxPDHB.setSelectedItem(pdhB);
+				textFieldPortaPDHB.setText(rs.getString("portaB"));
+				textFieldDidPDHB.setText(rs.getString("didB"));								
+				
+			}else if(("p".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
+				panel_3.setVisible(true);
+				panel_2.setVisible(true);
+				panel_1.setVisible(false);
+				panel_4.setVisible(false);
+				chckbxPdh.setSelected(true);
+				chckbxSdh_1.setSelected(true);
+				
+				String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
+				RS = conecta.stm.executeQuery(buscaCidadeA);
+				
+				while(RS.next()){
+					cidadeA = RS.getString("cidadeNome");
+					break;
+				}
+				
+				String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
+				RS = conecta.stm.executeQuery(buscaPdhA);
+				
+				while(RS.next()){
+					pdhA = RS.getString("modeloRadio");
+					break;
+				}		
+				
+				String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
+				RS = conecta.stm.executeQuery(nomeSdhB);
+				
+				while(RS.next()){
+					sdhB = RS.getString("sdhNome");
+					break;
+				}
+				
+				String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+				RS = conecta.stm.executeQuery(nomeCidadeB);
+				
+				while(RS.next()){
+					cidadeB = RS.getString("cidadeNome");
+					break;
+				}
+				
+				String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
+				RS = conecta.stm.executeQuery(buscaEstacaoB);
+				
+				while(RS.next()){
+					estacaoB = RS.getString("estacaoSigla");
+					break;
+				}
+				
+				//Carrega dados ponta A PDH
+				textArea.setText(rs.getString("observacoesCircuito"));
+				textFieldCliente.setText(rs.getString("cliente"));
+				comboBoxCidadeA.setSelectedItem(cidadeA);
+				comboBoxPDHA.setSelectedItem(pdhA);
+				textFieldPortaPDHA.setText(rs.getString("portaA"));
+				textFieldDidPDHA.setText(rs.getString("didA"));
+				if(statusCircuito.equals("ativo")){
+					rdbtnAtivo.setSelected(true);
+				}else{
+					rdbtnDesativado.setSelected(true);
+				}
+				
+				//Carrega dados ponta B SDH						
+				textFieldSlotSDHB.setText(rs.getString("slotB"));
+				comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
+				textFieldDidSDHB.setText(rs.getString("didB"));
+				comboBoxCidadeSDHB.setSelectedItem(cidadeB);
+				comboBoxEstacaoSDHB.setSelectedItem(estacaoB);
+				comboBoxSDHB.setSelectedItem(sdhB);						
+										
+			}											
+			
+		}catch(SQLException ev){
+			JOptionPane.showMessageDialog(null, "Selecione Uma Cabeceira Para a LTG");
+			textFieldCircuito.setText("");
+		}
+		 }
+			//Início da Lógica caso cabeceira seja selecionada
+		else{
+			textFieldCircuito.setText(circuitoDesejado);
+			buttonSalvar.setEnabled(false);
+			buttonAtualizar.setEnabled(true);
+			ResultSet rs = null;
+			ResultSet RS = null;
+			String statusA = null;
+			String statusB = null;
+			String statusCircuito = null;
+			try{
+				ConectaBanco conecta = new ConectaBanco();
+				conecta.conectaBanco();					
+				
+				String buscaStatus = "select * from circuito where circuitoNumero = '"+circuitoDesejado+"' and cabeceira='"+nomeCabeceira+"'";
+				rs = conecta.stm.executeQuery(buscaStatus);
+			
+				if(rs.next()){
+					statusA = rs.getString("statusA");
+					statusB = rs.getString("statusB");
+					indexSDHA = rs.getInt("codSdhA");
+					indexSDHB = rs.getInt("codSdhB");
+					indexPdhA = rs.getInt("codPdhA");
+					indexPdhB = rs.getInt("codPdhB");
+					indexCidadeA = rs.getInt("codCidadeA");
+					indexCidadeB = rs.getInt("codCidadeB");
+					indexEstacaoA = rs.getInt("codEstacaoA");
+					indexEstacaoB = rs.getInt("codEstacaoB");	
+					statusCircuito = rs.getString("statusCircuito");
+				}
+				if(("s".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
+					panel_1.setVisible(true);
+					panel_2.setVisible(true);
+					panel_3.setVisible(false);
+					panel_4.setVisible(false);	
+					chckbxSdh.setSelected(true);
+					chckbxSdh_1.setSelected(true);
+												
+						String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
+						RS = conecta.stm.executeQuery(buscaSDH);
+						
+						while(RS.next()){
+							sdhA = RS.getString("sdhNome");
+							break;
+						}
+						
+						String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
+						RS = conecta.stm.executeQuery(nomeSdhB);
+						
+						while(RS.next()){
+							sdhB = RS.getString("sdhNome");
+							break;
+						}
+						
+						String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
+						RS = conecta.stm.executeQuery(nomeCidade);
+						
+						while(RS.next()){
+							cidadeA = RS.getString("cidadeNome");
+							break;
+						}
+						
+						String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
+						RS = conecta.stm.executeQuery(buscaEstacaoA);
+						
+						while(RS.next()){
+							estacaoA = RS.getString("estacaoSigla");
+							break;
+						}
+						
+						String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+						RS = conecta.stm.executeQuery(nomeCidadeB);
+						
+						while(RS.next()){
+							cidadeB = RS.getString("cidadeNome");
+							break;
+						}
+						
+						String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
+						RS = conecta.stm.executeQuery(buscaEstacaoB);
+						
+						while(RS.next()){
+							estacaoB = RS.getString("estacaoSigla");
+							break;
+						}								
+					
+					//Carregando dados da ponta A SDH
+					textFieldCliente.setText(rs.getString("cliente"));
+					textArea.setText(rs.getString("observacoesCircuito"));							
+					comboBoxCabeceira.setSelectedItem(rs.getString("cabeceira"));
+					textFieldSlotSDHA.setText(rs.getString("slotA"));
+					comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
+					textFieldDidSDHA.setText(rs.getString("didA"));	
+					comboBoxCidadeSDHA.setSelectedItem(cidadeA);
+					comboBoxEstacaoSDHA.setSelectedItem(estacaoA);	
+					comboBoxSDHA.setSelectedItem(sdhA);
+					if(statusCircuito.equals("ativo")){
+						rdbtnAtivo.setSelected(true);
+					}else{
+						rdbtnDesativado.setSelected(true);
+					}
+					
+					//Carregando dados da ponta B SDH							
+					textFieldSlotSDHB.setText(rs.getString("slotB"));
+					comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
+					textFieldDidSDHB.setText(rs.getString("didB"));
+					comboBoxCidadeSDHB.setSelectedItem(cidadeB);
+					comboBoxEstacaoSDHB.setSelectedItem(estacaoB);
+					comboBoxSDHB.setSelectedItem(sdhB);
+					
+					
+				}else if(("s".equals(rs.getString("statusA")))&&("pB".equals(rs.getString("statusB")))){
+					panel_1.setVisible(true);
+					panel_4.setVisible(true);
+					panel_2.setVisible(false);
+					panel_3.setVisible(false);
+					chckbxSdh.setSelected(true);
+					chckbxPdh_1.setSelected(true);
+					
+					String buscaSDH = "select * from sdh where idsdh='"+indexSDHA+"'";
+					RS = conecta.stm.executeQuery(buscaSDH);
+					
+					while(RS.next()){
+						sdhA = RS.getString("sdhNome");
+						break;
+					}
+					
+					String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+					RS = conecta.stm.executeQuery(buscaCidadeB);
+					
+					while(RS.next()){
+						cidadeB = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
+					RS = conecta.stm.executeQuery(buscaPdhB);
+					
+					while(RS.next()){
+						pdhB = RS.getString("modeloRadio");
+						break;
+					}
+					
+					String nomeCidade = "select * from cidade where idcidade='"+indexCidadeA+"'";
+					RS = conecta.stm.executeQuery(nomeCidade);
+					
+					while(RS.next()){
+						cidadeA = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaEstacaoA = "select * from estacao where idEstacao='"+indexEstacaoA+"'";
+					RS = conecta.stm.executeQuery(buscaEstacaoA);
+					
+					while(RS.next()){
+						estacaoA = RS.getString("estacaoSigla");
+						break;
+					}
+					
+					//Carregando dados da ponta A SDH
+					textFieldCliente.setText(rs.getString("cliente"));
+					comboBoxCabeceira.setSelectedItem(rs.getString("cabeceira"));
+					textArea.setText(rs.getString("observacoesCircuito"));							
+					textFieldSlotSDHA.setText(rs.getString("slotA"));
+					comboBoxPortaSDHA.setSelectedItem(rs.getString("portaA"));
+					textFieldDidSDHA.setText(rs.getString("didA"));	
+					comboBoxCidadeSDHA.setSelectedItem(cidadeA);
+					comboBoxEstacaoSDHA.setSelectedItem(estacaoA);
+					comboBoxSDHA.setSelectedItem(sdhA);
+					if(statusCircuito.equals("ativo")){
+						rdbtnAtivo.setSelected(true);
+					}else{
+						rdbtnDesativado.setSelected(true);
+					}
+					
+					//Carrega dados da ponta B PDH
+					comboBoxCidadeB.setSelectedItem(cidadeB);
+					comboBoxPDHB.setSelectedItem(pdhB);
+					textFieldPortaPDHB.setText(rs.getString("portaB"));
+					textFieldDidPDHB.setText(rs.getString("didB"));
+					
+				}else if(("p".equals(rs.getString("statusA")))&&("pB".equals(rs.getString("statusB")))){
+					panel_3.setVisible(true);
+					panel_4.setVisible(true);
+					panel_1.setVisible(false);
+					panel_2.setVisible(false);
+					chckbxPdh.setSelected(true);
+					chckbxPdh_1.setSelected(true);
+					
+					String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
+					RS = conecta.stm.executeQuery(buscaCidadeA);
+					
+					while(RS.next()){
+						cidadeA = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
+					RS = conecta.stm.executeQuery(buscaPdhA);
+					
+					while(RS.next()){
+						pdhA = RS.getString("modeloRadio");
+						break;
+					}						
+					
+					String buscaCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+					RS = conecta.stm.executeQuery(buscaCidadeB);
+					
+					while(RS.next()){
+						cidadeB = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaPdhB = "select * from radio where idRadio='"+indexPdhB+"'";
+					RS = conecta.stm.executeQuery(buscaPdhB);
+					
+					while(RS.next()){
+						pdhB = RS.getString("modeloRadio");
+						break;
+					}							
+					
+					//Carrega dados ponta A PDH
+					textArea.setText(rs.getString("observacoesCircuito"));
+					textFieldCliente.setText(rs.getString("cliente"));
+					comboBoxCabeceira.setSelectedItem(rs.getString("cabeceira"));
+					comboBoxCidadeA.setSelectedItem(cidadeA);
+					comboBoxPDHA.setSelectedItem(pdhA);
+					textFieldPortaPDHA.setText(rs.getString("portaA"));
+					textFieldDidPDHA.setText(rs.getString("didA"));
+					if(statusCircuito.equals("ativo")){
+						rdbtnAtivo.setSelected(true);
+					}else{
+						rdbtnDesativado.setSelected(true);
+					}
+					
+					//Carrega dados da ponta B PDH
+					comboBoxCidadeB.setSelectedItem(cidadeB);
+					comboBoxPDHB.setSelectedItem(pdhB);
+					textFieldPortaPDHB.setText(rs.getString("portaB"));
+					textFieldDidPDHB.setText(rs.getString("didB"));		
+					
+					
+				}else if(("p".equals(rs.getString("statusA")))&&("sB".equals(rs.getString("statusB")))){
+					panel_3.setVisible(true);
+					panel_2.setVisible(true);
+					panel_1.setVisible(false);
+					panel_4.setVisible(false);
+					chckbxPdh.setSelected(true);
+					chckbxSdh_1.setSelected(true);
+					
+					String buscaCidadeA = "select * from cidade where idcidade='"+indexCidadeA+"'";
+					RS = conecta.stm.executeQuery(buscaCidadeA);
+					
+					while(RS.next()){
+						cidadeA = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaPdhA = "select * from radio where idRadio='"+indexPdhA+"'";
+					RS = conecta.stm.executeQuery(buscaPdhA);
+					
+					while(RS.next()){
+						pdhA = RS.getString("modeloRadio");
+						break;
+					}		
+					
+					String nomeSdhB = "select * from sdh where idsdh='"+indexSDHB+"'";
+					RS = conecta.stm.executeQuery(nomeSdhB);
+					
+					while(RS.next()){
+						sdhB = RS.getString("sdhNome");
+						break;
+					}
+					
+					String nomeCidadeB = "select * from cidade where idcidade='"+indexCidadeB+"'";
+					RS = conecta.stm.executeQuery(nomeCidadeB);
+					
+					while(RS.next()){
+						cidadeB = RS.getString("cidadeNome");
+						break;
+					}
+					
+					String buscaEstacaoB = "select * from estacao where idEstacao='"+indexEstacaoB+"'";
+					RS = conecta.stm.executeQuery(buscaEstacaoB);
+					
+					while(RS.next()){
+						estacaoB = RS.getString("estacaoSigla");
+						break;
+					}
+					
+					//Carrega dados ponta A PDH
+					textArea.setText(rs.getString("observacoesCircuito"));
+					textFieldCliente.setText(rs.getString("cliente"));
+					comboBoxCabeceira.setSelectedItem(rs.getString("cabeceira"));
+					comboBoxCidadeA.setSelectedItem(cidadeA);
+					comboBoxPDHA.setSelectedItem(pdhA);
+					textFieldPortaPDHA.setText(rs.getString("portaA"));
+					textFieldDidPDHA.setText(rs.getString("didA"));
+					if(statusCircuito.equals("ativo")){
+						rdbtnAtivo.setSelected(true);
+					}else{
+						rdbtnDesativado.setSelected(true);
+					}
+					
+					//Carrega dados ponta B SDH							
+					textFieldSlotSDHB.setText(rs.getString("slotB"));
+					comboBoxPortaSDHB.setSelectedItem(rs.getString("portaB"));
+					textFieldDidSDHB.setText(rs.getString("didB"));
+					comboBoxCidadeSDHB.setSelectedItem(cidadeB);
+					comboBoxEstacaoSDHB.setSelectedItem(estacaoB);	
+					comboBoxSDHB.setSelectedItem(sdhB);
+				}											
+				
+			}catch(SQLException ev){
+				JOptionPane.showMessageDialog(null, "Não Há Circuito Para Essa LTG Na Cabeceira Selecionada");
+				
+				textFieldCircuito.setText("");
+			}					
+		}//Fim do segundo else
+	} //Fim do método de receber circuito
+			
+  
+	
 	public void buscaCidade(){
 		
 		ResultSet rs = null;
@@ -214,7 +873,7 @@ public class TelaCadastroCircuito extends JFrame {
 		
 		JButton button_1 = new JButton("");
 		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {/*
 				Circuito novoCircuito = new Circuito();
 				String circuitoDesejado = textFieldCircuito.getText();				
 				boolean verifica = novoCircuito.verificaCircuito(circuitoDesejado);
@@ -860,7 +1519,7 @@ public class TelaCadastroCircuito extends JFrame {
 				}//Fim do segundo else
 			}else{
 				JOptionPane.showMessageDialog(null, "Circuito Não Cadastrado no Banco de Dados");
-			}
+			}*/
 			}
 		});
 		button_1.setToolTipText("Pesquisar");
