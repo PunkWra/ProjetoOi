@@ -873,7 +873,7 @@ public class TelaCadastroCircuito extends JFrame {
 		
 		JButton button_1 = new JButton("");
 		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {/*
+			public void actionPerformed(ActionEvent arg0) {
 				Circuito novoCircuito = new Circuito();
 				String circuitoDesejado = textFieldCircuito.getText();				
 				boolean verifica = novoCircuito.verificaCircuito(circuitoDesejado);
@@ -1519,7 +1519,7 @@ public class TelaCadastroCircuito extends JFrame {
 				}//Fim do segundo else
 			}else{
 				JOptionPane.showMessageDialog(null, "Circuito Não Cadastrado no Banco de Dados");
-			}*/
+			}
 			}
 		});
 		button_1.setToolTipText("Pesquisar");
