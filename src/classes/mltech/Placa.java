@@ -12,13 +12,14 @@ import javax.swing.JOptionPane;
 
 public class Placa {
 	
-	private String serialPlaca;
-	private String localPlaca;
-	private Date dataEnvio;
-	private String obervacoes;
+	
+	private Date dataEnvio;	
 	private int indiceCidade;
 	private int indiceEstacao;
 	private int indiceModelo;
+	private String obervacoes;
+	private String serialPlaca;
+	private String localPlaca;
 	private String statusPlaca;
 	private String tecnicaPlaca;
 	private String almoxPlaca;
@@ -181,16 +182,8 @@ public class Placa {
 			
 		}catch(SQLException e){
 			JOptionPane.showMessageDialog(null, e);
-		}
-		
-		
-		
+		}		
 		
 	}
-	
-	
-	
-	
-	
 
 }

@@ -8,8 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Circuito {
 	
-	private int indiceCircuito;
-	private String numeroCircuito;	
+	private int indiceCircuito;	
 	private int equipamentoPDHA;
 	private int equipamentoPDHB;
 	private int equipamentoSDHA;
@@ -18,6 +17,7 @@ public class Circuito {
 	private int cidadeB;
 	private int estacaoA;
 	private int estacaoB;
+	private String numeroCircuito;	
 	private String portaA;
 	private String portaB;
 	private String obervacoes;

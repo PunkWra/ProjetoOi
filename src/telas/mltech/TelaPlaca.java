@@ -126,7 +126,7 @@ public class TelaPlaca extends JFrame {
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();
 			
-			String buscaCidade = "select * from cidade order by cidadeNome ASC";
+			String buscaCidade = "select * from cidades order by cidadeNome ASC";
 			rs = conecta.stm.executeQuery(buscaCidade);
 			
 			while(rs.next()){
@@ -141,7 +141,6 @@ public class TelaPlaca extends JFrame {
 	}//Fim do método de busca das cidades
 	
 	public void recebeSerial(String novoSerial){
-
 		
 		boolean verifica;
 		ResultSet rs = null;
@@ -158,11 +157,13 @@ public class TelaPlaca extends JFrame {
 				Placa placa = new Placa();	
 				novoSerial = novoSerial.replace(" ", "").toUpperCase();
 				verifica = placa.verificaPlaca(novoSerial);
+				
 				if(verifica==false){
 					JOptionPane.showMessageDialog(null, "Placa Não Cadastrada");
 				}else if(verifica==true){
 					buttonSalvar.setEnabled(false);
 					buttonAtualizar.setEnabled(true);
+					
 						try{
 							ConectaBanco conecta = new ConectaBanco();
 							conecta.conectaBanco();
@@ -171,12 +172,12 @@ public class TelaPlaca extends JFrame {
 							rs = conecta.stm.executeQuery(buscaStatus);
 							
 							while(rs.next()){
-								status=rs.getString("statusPlaca");
+								status=rs.getString("statusPlaca");								
 								tecnica = rs.getString("tecnicaPlaca");
 								String buscaModelo = "select * from modeloplaca where idModelo='"+rs.getString("modelo")+"'";
 								RS = conecta.stm.executeQuery(buscaModelo);
 								
-								String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
+								String buscaCidade = "select * from cidades where idcidade='"+rs.getInt("cidade")+"'";
 								RS1 = conecta.stm.executeQuery(buscaCidade);
 								
 								while(RS1.next()){
@@ -186,7 +187,7 @@ public class TelaPlaca extends JFrame {
 								while(RS.next()){
 									modelo = RS.getString("partNumberModelo");											
 								}
-							
+								
 							if("Almox".equals(status)){
 								
 								if("TX".equals(tecnica)){
@@ -204,13 +205,13 @@ public class TelaPlaca extends JFrame {
 								}
 								
 								rdbtnAlmox.setSelected(true);
-								textFieldLocal.setText(rs.getString("localPlaca"));
+								textFieldLocal.setText(rs.getString("localPlaca"));								
 								comboBoxPartNumber.setSelectedItem(modelo);
-								textFieldSerial.setText(novoSerial);
+								textFieldSerial.setText(novoSerial);								
 								dateChooser.setDate(rs.getDate("dataEnvio"));
 								comboBoxAlmox.setSelectedItem(rs.getString("almoxPlaca"));
-								comboBoxEnviado.setSelectedItem("Selecione Cidade");
-								comboBoxUtilizado.setSelectedItem("Selecione Cidade");
+								comboBoxEnviado.setSelectedItem("Selecione Cidade");								
+								comboBoxUtilizado.setSelectedItem("Selecione Cidade");				
 								textArea.setText(rs.getString("observacoes"));										
 								
 								
@@ -292,7 +293,7 @@ public class TelaPlaca extends JFrame {
 							}//Fim da condição caso o status seja Planta
 							}//Fim do while
 						}catch(SQLException e){
-							
+							JOptionPane.showMessageDialog(null, e);
 						}								
 				}				
 		
@@ -389,7 +390,7 @@ public class TelaPlaca extends JFrame {
 										
 										while(rs.next()){										
 											status = rs.getString("statusPlaca");
-											String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
+											String buscaCidade = "select * from cidades where idcidade='"+rs.getInt("cidade")+"'";
 											RS = conecta.stm.executeQuery(buscaCidade);											
 											
 											while(RS.next()){
@@ -518,7 +519,7 @@ public class TelaPlaca extends JFrame {
 							
 								while(rs.next()){
 									     status = rs.getString("statusPlaca");
-									     String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
+									     String buscaCidade = "select * from cidades where idcidade='"+rs.getInt("cidade")+"'";
 										 RS = conecta.stm.executeQuery(buscaCidade);										 
 											
 											while(RS.next()){
@@ -602,7 +603,7 @@ public class TelaPlaca extends JFrame {
 								indiceModelo = rs.getInt("idModelo");								
 							}										
 							
-							String buscaIndiceCidade = "select * from cidade where cidadeNome='"+comboBoxEnviado.getSelectedItem()+"'";
+							String buscaIndiceCidade = "select * from cidades where cidadeNome='"+comboBoxEnviado.getSelectedItem()+"'";
 							RS = conecta.stm.executeQuery(buscaIndiceCidade);
 							
 							while(RS.next()){
@@ -1051,7 +1052,7 @@ public class TelaPlaca extends JFrame {
 					conecta.conectaBanco();
 					
 					//Busca o índice da cidade selecionada
-					String buscaIndiceCidade = "select idcidade from cidade where cidadeNome= '"+comboBoxUtilizado.getSelectedItem()+"'";
+					String buscaIndiceCidade = "select idcidade from cidades where cidadeNome= '"+comboBoxUtilizado.getSelectedItem()+"'";
 					RS = conecta.stm.executeQuery(buscaIndiceCidade);
 					while(RS.next()){
 						indiceCidade = RS.getInt("idcidade");
