@@ -37,6 +37,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 public class TelaCadastroCircuito extends JFrame {
 
@@ -851,6 +852,7 @@ public class TelaCadastroCircuito extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastroCircuito() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastroCircuito.class.getResource("/imagens/mltech/thCGK4S3UD.jpg")));
 		setTitle("Cadastro de Circuito");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 665, 495);

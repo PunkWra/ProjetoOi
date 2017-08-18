@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Toolkit;
 
 public class TelaOpcaoCircuito extends JFrame {
 
@@ -40,6 +41,7 @@ public class TelaOpcaoCircuito extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaOpcaoCircuito() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaOpcaoCircuito.class.getResource("/imagens/mltech/thCGK4S3UD.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 418, 239);
 		contentPane = new JPanel();

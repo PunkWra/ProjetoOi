@@ -8,7 +8,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class ConectaBanco {
-
 	
 	public Connection con;
 	public static Statement stm;	
@@ -16,12 +15,11 @@ public class ConectaBanco {
 	public void conectaBanco() throws SQLException {
 		
 		try{
-		con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistema_oi","root","root");
+		con = DriverManager.getConnection("jdbc:mariadb://10.52.81.39:3306/sistema_oi","root","MariaLuiza");
 		stm = con.createStatement();
 		}catch(SQLException e){
 			JOptionPane.showMessageDialog(null, "Não Foi Possível Conectar ao Banco");
 		}
-	}
-	
+	}	
 
 }

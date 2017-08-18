@@ -126,7 +126,7 @@ public class TelaPlaca extends JFrame {
 			ConectaBanco conecta = new ConectaBanco();
 			conecta.conectaBanco();
 			
-			String buscaCidade = "select * from cidades order by cidadeNome ASC";
+			String buscaCidade = "select * from cidade order by cidadeNome ASC";
 			rs = conecta.stm.executeQuery(buscaCidade);
 			
 			while(rs.next()){
@@ -177,7 +177,7 @@ public class TelaPlaca extends JFrame {
 								String buscaModelo = "select * from modeloplaca where idModelo='"+rs.getString("modelo")+"'";
 								RS = conecta.stm.executeQuery(buscaModelo);
 								
-								String buscaCidade = "select * from cidades where idcidade='"+rs.getInt("cidade")+"'";
+								String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
 								RS1 = conecta.stm.executeQuery(buscaCidade);
 								
 								while(RS1.next()){
@@ -390,7 +390,7 @@ public class TelaPlaca extends JFrame {
 										
 										while(rs.next()){										
 											status = rs.getString("statusPlaca");
-											String buscaCidade = "select * from cidades where idcidade='"+rs.getInt("cidade")+"'";
+											String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
 											RS = conecta.stm.executeQuery(buscaCidade);											
 											
 											while(RS.next()){
@@ -519,7 +519,7 @@ public class TelaPlaca extends JFrame {
 							
 								while(rs.next()){
 									     status = rs.getString("statusPlaca");
-									     String buscaCidade = "select * from cidades where idcidade='"+rs.getInt("cidade")+"'";
+									     String buscaCidade = "select * from cidade where idcidade='"+rs.getInt("cidade")+"'";
 										 RS = conecta.stm.executeQuery(buscaCidade);										 
 											
 											while(RS.next()){
@@ -603,7 +603,7 @@ public class TelaPlaca extends JFrame {
 								indiceModelo = rs.getInt("idModelo");								
 							}										
 							
-							String buscaIndiceCidade = "select * from cidades where cidadeNome='"+comboBoxEnviado.getSelectedItem()+"'";
+							String buscaIndiceCidade = "select * from cidade where cidadeNome='"+comboBoxEnviado.getSelectedItem()+"'";
 							RS = conecta.stm.executeQuery(buscaIndiceCidade);
 							
 							while(RS.next()){
@@ -1052,7 +1052,7 @@ public class TelaPlaca extends JFrame {
 					conecta.conectaBanco();
 					
 					//Busca o índice da cidade selecionada
-					String buscaIndiceCidade = "select idcidade from cidades where cidadeNome= '"+comboBoxUtilizado.getSelectedItem()+"'";
+					String buscaIndiceCidade = "select idcidade from cidade where cidadeNome= '"+comboBoxUtilizado.getSelectedItem()+"'";
 					RS = conecta.stm.executeQuery(buscaIndiceCidade);
 					while(RS.next()){
 						indiceCidade = RS.getInt("idcidade");

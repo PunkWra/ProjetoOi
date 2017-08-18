@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class TelaSobre extends JFrame {
 
@@ -33,6 +34,7 @@ public class TelaSobre extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaSobre() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaSobre.class.getResource("/imagens/mltech/thCGK4S3UD.jpg")));
 		setTitle("Sobre");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 453, 269);
@@ -60,7 +62,7 @@ public class TelaSobre extends JFrame {
 		lblContato.setBounds(26, 75, 60, 14);
 		panel.add(lblContato);
 		
-		JLabel lblWladimirsouzaoutlookcom = new JLabel("wladimirsouza@outlook.com");
+		JLabel lblWladimirsouzaoutlookcom = new JLabel("ml-solucoes@outlook.com");
 		lblWladimirsouzaoutlookcom.setBounds(96, 75, 183, 14);
 		panel.add(lblWladimirsouzaoutlookcom);
 	}

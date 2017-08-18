@@ -154,7 +154,7 @@ public class TelaMostraPlacas extends JFrame {
 			while(rs.next()){	
 				indiceCidade = rs.getInt("cidade");
 				
-				String buscaCidade = "select * from cidades where idcidade='"+indiceCidade+"'";
+				String buscaCidade = "select * from cidade where idcidade='"+indiceCidade+"'";
 				RS = conecta.stm.executeQuery(buscaCidade);			
 				
 				while(RS.next()){				
