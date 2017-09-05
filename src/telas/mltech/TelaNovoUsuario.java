@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classes.mltech.Criptografia;
+import classes.mltech.Login;
+
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -21,8 +25,9 @@ import java.awt.event.ActionEvent;
 public class TelaNovoUsuario extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textFieldUser;
 	private JPasswordField passwordField;
+	private JComboBox comboBoxRegiao;
 
 	/**
 	 * Launch the application.
@@ -68,19 +73,19 @@ public class TelaNovoUsuario extends JFrame {
 		lblRegio.setBounds(107, 163, 56, 16);
 		contentPane.add(lblRegio);
 		
-		textField = new JTextField();
-		textField.setBounds(175, 68, 173, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldUser = new JTextField();
+		textFieldUser.setBounds(175, 68, 173, 22);
+		contentPane.add(textFieldUser);
+		textFieldUser.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(175, 116, 173, 22);
 		contentPane.add(passwordField);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Selecione Regi\u00E3o", "PMM", "SAN", "SMA"}));
-		comboBox.setBounds(205, 160, 143, 22);
-		contentPane.add(comboBox);
+		comboBoxRegiao = new JComboBox();
+		comboBoxRegiao.setModel(new DefaultComboBoxModel(new String[] {"Selecione Regi\u00E3o", "PMM", "SAN", "SMA"}));
+		comboBoxRegiao.setBounds(205, 160, 143, 22);
+		contentPane.add(comboBoxRegiao);
 		
 		JButton btnCancelar = new JButton("Sair");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -93,6 +98,20 @@ public class TelaNovoUsuario extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		JButton btnCriar = new JButton("Criar");
+		btnCriar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String usuario = textFieldUser.getText();
+				String regiao = (String)comboBoxRegiao.getSelectedItem();
+				Criptografia crip = new Criptografia();
+				Login login = new Login();
+				String senha = passwordField.getText();
+				String novaSenha = crip.retornaSenha(senha);
+				
+				login.adicionaUsuario(usuario, novaSenha, regiao);
+				
+				
+			}
+		});
 		btnCriar.setIcon(new ImageIcon(TelaNovoUsuario.class.getResource("/imagens/mltech/Aceitar (Copy).png")));
 		btnCriar.setBounds(293, 235, 97, 25);
 		contentPane.add(btnCriar);

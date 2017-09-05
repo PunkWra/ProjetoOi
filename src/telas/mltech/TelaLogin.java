@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import classes.mltech.ConectaBanco;
+import classes.mltech.Criptografia;
 import classes.mltech.Login;
 
 import javax.swing.JLabel;
@@ -82,7 +83,7 @@ public class TelaLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 606, 311);
+		panel.setBounds(0, 0, 606, 268);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -109,22 +110,23 @@ public class TelaLogin extends JFrame {
 				
 				if(evt.getKeyCode()==KeyEvent.VK_ENTER){
 					try{
+						Criptografia crip = new Criptografia();
 			            
 				        ConectaBanco conecta = new ConectaBanco();			        
 				        conecta.conectaBanco();
 				        
 				        String loginusuario = textFieldUsuario.getText();
 				        String senhaUsuario = passwordField.getText();
+				        String senhaVerificada = crip.retornaSenha(senhaUsuario);
 				        
 				        String fazerLogin = "select * from login where loginNome = '" +textFieldUsuario.getText() + "'";
 				        
 				        ResultSet rs = ConectaBanco.stm.executeQuery(fazerLogin);
 				        rs.first();
-				        
-				        if((loginusuario.equals(rs.getString("loginNome")))&&(senhaUsuario.equals(rs.getString("loginSenha"))))
+				       
+				        if((loginusuario.equals(rs.getString("loginNome")))&&(senhaVerificada.equals(rs.getString("loginSenha"))))
 				        {
-				            if(loginusuario.equals("admin"))
-				            {
+				            				            
 				                JOptionPane.showMessageDialog(null, "Acesso Autorizado");
 				                //Chamar Tela de Opções  
 				                 textFieldUsuario.setText("");
@@ -133,7 +135,7 @@ public class TelaLogin extends JFrame {
 				                    telaopcoes.setVisible(true);
 				                    dispose();
 				                
-				            }
+				            
 				            if(loginusuario.equals("visitante"))
 				            {
 				                JOptionPane.showMessageDialog(null, "Acesso Autorizado Apenas Para Consultas");         
@@ -175,13 +177,16 @@ public class TelaLogin extends JFrame {
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Criptografia crip = new Criptografia();
+				
 				
                  Login login = new Login();
 				
 				String usuario = textFieldUsuario.getText();
 				String senha = passwordField.getText();
+				String senhaVerificada = crip.retornaSenha(senha);
 				
-				boolean verificaDados = login.verificaUsuario(usuario, senha);
+				boolean verificaDados = login.verificaUsuario(usuario, senhaVerificada);
 				
 				if(verificaDados==true){
 					JOptionPane.showMessageDialog(null, "Acesso Autorizado");

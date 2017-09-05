@@ -15,7 +15,7 @@ public class ConectaBanco {
 	public void conectaBanco() throws SQLException {
 		
 		try{
-		con = DriverManager.getConnection("jdbc:mariadb://10.52.81.39:3306/sistema_oi","root","MariaLuiza");
+		con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sistema_oi","root","root");
 		stm = con.createStatement();
 		}catch(SQLException e){
 			JOptionPane.showMessageDialog(null, "Não Foi Possível Conectar ao Banco");

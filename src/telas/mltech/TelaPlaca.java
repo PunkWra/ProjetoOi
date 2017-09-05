@@ -422,6 +422,7 @@ public class TelaPlaca extends JFrame {
 											comboBoxPartNumber.setSelectedItem(modelo);
 											textFieldSerial.setText(rs.getString("serialPlaca"));
 											comboBoxAlmox.setSelectedItem(rs.getString("almoxPlaca"));
+											buttonAtualizar.setEnabled(true);
 										}else if("Reparo".equals(status)){
 											rdbtnOutraFilial.setSelected(false);
 											rdbtnPlantaInterna.setSelected(false);
@@ -434,6 +435,7 @@ public class TelaPlaca extends JFrame {
 											textArea.setText(rs.getString("observacoes"));
 											comboBoxPartNumber.setSelectedItem(modelo);
 											dateChooser.setDate(rs.getDate("dataEnvio"));
+											buttonAtualizar.setEnabled(true);
 											
 										}else if("Filial".equals(status)){
 											rdbtnPlantaInterna.setSelected(false);
@@ -444,7 +446,8 @@ public class TelaPlaca extends JFrame {
 											textFieldLocal.setEnabled(false);
 											dateChooser.setDate(rs.getDate("dataEnvio"));
 											comboBoxEnviado.setSelectedItem(cidade);
-											textArea.setText(rs.getString("observacoes"));											
+											textArea.setText(rs.getString("observacoes"));	
+											buttonAtualizar.setEnabled(true);
 										}else if("Planta".equals(status)){
 											rdbtnAlmox.setSelected(false);
 											rdbtnEnvioPReparo.setSelected(false);
@@ -455,6 +458,7 @@ public class TelaPlaca extends JFrame {
 											dateChooser.setDate(rs.getDate("dataEnvio"));
 											comboBoxUtilizado.setSelectedItem(cidade);
 											comboBoxEstacao.setSelectedItem(estacao);
+											buttonAtualizar.setEnabled(true);
 										}										
 										}										
 										
