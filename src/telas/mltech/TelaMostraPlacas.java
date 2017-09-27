@@ -34,6 +34,7 @@ import javax.swing.JScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 public class TelaMostraPlacas extends JFrame {
 
@@ -48,6 +49,7 @@ public class TelaMostraPlacas extends JFrame {
 	private JComboBox comboBoxModelo;
 	public String novoComentario;
 	private JRadioButton rdbtnEnviadoPara;
+	private JTextField textFieldSerial;
 
 	/**
 	 * Launch the application.
@@ -186,14 +188,14 @@ public class TelaMostraPlacas extends JFrame {
 	public TelaMostraPlacas() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaMostraPlacas.class.getResource("/imagens/mltech/thCGK4S3UD.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 658, 429);
+		setBounds(100, 100, 668, 470);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 640, 382);
+		panel.setBounds(0, 0, 650, 423);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -400,7 +402,7 @@ public class TelaMostraPlacas extends JFrame {
 		panel.add(comboBoxModelo);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 222, 630, 147);
+		scrollPane.setBounds(12, 263, 630, 147);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -508,7 +510,32 @@ public class TelaMostraPlacas extends JFrame {
 		});
 		button.setToolTipText("Pesquisar");
 		button.setIcon(new ImageIcon(TelaMostraPlacas.class.getResource("/imagens/mltech/Pesquisar.png")));
-		button.setBounds(536, 168, 92, 41);
+		button.setBounds(426, 105, 92, 41);
 		panel.add(button);
+		
+		JLabel lblPesquisarPorSerial = new JLabel("Pesquisar Por Serial:");
+		lblPesquisarPorSerial.setBounds(218, 193, 157, 16);
+		panel.add(lblPesquisarPorSerial);
+		
+		textFieldSerial = new JTextField();
+		textFieldSerial.setBounds(218, 218, 172, 22);
+		panel.add(textFieldSerial);
+		textFieldSerial.setColumns(10);
+		
+		JButton button_1 = new JButton("");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(textFieldSerial.getText() == ""){
+					JOptionPane.showMessageDialog(null, "Nenhum Serial Digitado");
+				}else{
+					TelaPlaca novaPlaca = new TelaPlaca();					
+					novaPlaca.recebeSerial(textFieldSerial.getText());
+					novaPlaca.setVisible(true);
+				}
+			}
+		});
+		button_1.setIcon(new ImageIcon(TelaMostraPlacas.class.getResource("/imagens/mltech/Pesquisar.png")));
+		button_1.setBounds(426, 199, 97, 41);
+		panel.add(button_1);
 	}
 }

@@ -125,22 +125,15 @@ public class TelaLogin extends JFrame {
 				        rs.first();
 				       
 				        if((loginusuario.equals(rs.getString("loginNome")))&&(senhaVerificada.equals(rs.getString("loginSenha"))))
-				        {
-				            				            
+				        {				            				            
 				                JOptionPane.showMessageDialog(null, "Acesso Autorizado");
 				                //Chamar Tela de Opções  
 				                 textFieldUsuario.setText("");
 				                    passwordField.setText("");                    
 				                    TelaOpcoes telaopcoes = new TelaOpcoes();
 				                    telaopcoes.setVisible(true);
-				                    dispose();
-				                
+				                    dispose();				                
 				            
-				            if(loginusuario.equals("visitante"))
-				            {
-				                JOptionPane.showMessageDialog(null, "Acesso Autorizado Apenas Para Consultas");         
-				              			                
-				            }
 				        }else{
 				            JOptionPane.showMessageDialog(null, "Senha Incorreta");
 				            textFieldUsuario.setText("");
