@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -28,6 +29,8 @@ import java.awt.Font;
 public class TelaOpcoes extends JFrame {
 
 	private JPanel contentPane;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -43,6 +46,12 @@ public class TelaOpcoes extends JFrame {
 				}
 			}
 		});
+	}
+	
+  public void recebeUsuario(String nome){
+		
+	  
+		
 	}
 
 	/**
@@ -129,5 +138,7 @@ public class TelaOpcoes extends JFrame {
 		lblSccpSistema.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblSccpSistema.setBounds(77, 155, 451, 34);
 		contentPane.add(lblSccpSistema);
+		
+		
 	}
 }

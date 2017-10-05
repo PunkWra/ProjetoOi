@@ -107,8 +107,7 @@ public class TelaNovoUsuario extends JFrame {
 				String senha = passwordField.getText();
 				String novaSenha = crip.retornaSenha(senha);
 				
-				login.adicionaUsuario(usuario, novaSenha, regiao);
-				
+				login.adicionaUsuario(usuario, novaSenha, regiao);				
 				
 			}
 		});

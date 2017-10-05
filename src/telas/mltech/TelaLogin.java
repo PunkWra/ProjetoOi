@@ -186,6 +186,8 @@ public class TelaLogin extends JFrame {
 					TelaOpcoes opcoes = new TelaOpcoes();
 					opcoes.setVisible(true);
 					dispose();
+					TelaOpcoes novaOpcao = new TelaOpcoes();
+					novaOpcao.recebeUsuario(usuario);
 					textFieldUsuario.setText("");
 					passwordField.setText("");
 				}else{
