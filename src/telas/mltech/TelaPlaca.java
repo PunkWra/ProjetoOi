@@ -1146,6 +1146,9 @@ public class TelaPlaca extends JFrame {
 					comboBoxEstacao.setEnabled(false);
 					comboBoxUtilizado.setEnabled(false);
 					comboBoxAlmox.setEnabled(false);
+					comboBoxEnviado.setSelectedItem("Santa Maria");
+					comboBoxEnviado.setEnabled(false);
+					
 				}else{
 					textFieldLocal.setEnabled(true);
 					comboBoxEstacao.setEnabled(true);
