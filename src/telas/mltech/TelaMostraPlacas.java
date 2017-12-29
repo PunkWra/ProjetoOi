@@ -35,13 +35,18 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 
 public class TelaMostraPlacas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JRadioButton rdbtnTx;
-	private JRadioButton rdbtnDados;
+	private JRadioButton rdbtnDslamZte;
+	private JRadioButton rdbtnDslamNec;
+	private JRadioButton rdbtnMux;
+	private JRadioButton rdbtnDslamHuawei;
+	private JRadioButton rdbtnPdh;
+	private JRadioButton rdbtnSDH;
 	private JRadioButton rdbtnCx;
 	private JRadioButton rdbtnFilial;
 	private JRadioButton rdbtnPlantaInterna;
@@ -50,6 +55,7 @@ public class TelaMostraPlacas extends JFrame {
 	public String novoComentario;
 	private JRadioButton rdbtnEnviadoPara;
 	private JTextField textFieldSerial;
+	private JRadioButton rdbtnDwdm;
 
 	/**
 	 * Launch the application.
@@ -188,14 +194,14 @@ public class TelaMostraPlacas extends JFrame {
 	public TelaMostraPlacas() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaMostraPlacas.class.getResource("/imagens/mltech/thCGK4S3UD.jpg")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 668, 470);
+		setBounds(100, 100, 725, 564);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 650, 423);
+		panel.setBounds(0, 0, 707, 517);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -285,22 +291,33 @@ public class TelaMostraPlacas extends JFrame {
 		panel_1.add(rdbtnEnviadoPara);
 		
 		JLabel lblModeloDePlaca = new JLabel("Modelo de Placa");
-		lblModeloDePlaca.setBounds(218, 101, 107, 16);
+		lblModeloDePlaca.setBounds(20, 201, 107, 16);
 		panel.add(lblModeloDePlaca);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "T\u00E9cnica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(10, 101, 179, 87);
+		panel_2.setBounds(10, 101, 603, 87);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		rdbtnTx = new JRadioButton("TX");
-		rdbtnTx.addItemListener(new ItemListener() {
+		rdbtnSDH = new JRadioButton("SDH");
+		
+		rdbtnSDH.addItemListener(new ItemListener() {
+			
 			public void itemStateChanged(ItemEvent e) {
-				if(rdbtnTx.isSelected()){
+				
+				if(rdbtnSDH.isSelected()){
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnPdh.setSelected(false);
+					rdbtnMux.setSelected(false);
 					rdbtnCx.setSelected(false);
-					rdbtnDados.setSelected(false);
-					String status = "TX";	
+					rdbtnDwdm.setSelected(false);
+					
+					
+					String status = "SDH";	
 					ResultSet rs = null;
 					comboBoxModelo.removeAllItems();
 					
@@ -308,13 +325,12 @@ public class TelaMostraPlacas extends JFrame {
 						ConectaBanco conecta = new ConectaBanco();
 						conecta.conectaBanco();
 						
-						String buscaModeloPlaca = "select * from modeloplaca where statusModelo='"+status+"'";
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
 						rs = conecta.stm.executeQuery(buscaModeloPlaca);
 						
 						while(rs.next()){
 							comboBoxModelo.addItem(rs.getString("partNumberModelo"));
-						}						
-						
+						}							
 						
 					}catch(SQLException ev){
 						
@@ -326,15 +342,25 @@ public class TelaMostraPlacas extends JFrame {
 				}
 			}
 		});
-		rdbtnTx.setBounds(8, 20, 63, 25);
-		panel_2.add(rdbtnTx);
+		rdbtnSDH.setBounds(8, 20, 63, 25);
+		panel_2.add(rdbtnSDH);
 		
 		rdbtnCx = new JRadioButton("CX");
 		rdbtnCx.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
+				
 				if(rdbtnCx.isSelected()){
-					rdbtnTx.setSelected(false);
-					rdbtnDados.setSelected(false);
+					
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnPdh.setSelected(false);
+					rdbtnMux.setSelected(false);
+					rdbtnSDH.setSelected(false);	
+					rdbtnDwdm.setSelected(false);
+					
+					
 					String status = "CX";	
 					ResultSet rs = null;
 					comboBoxModelo.removeAllItems();
@@ -363,13 +389,22 @@ public class TelaMostraPlacas extends JFrame {
 		rdbtnCx.setBounds(8, 50, 68, 25);
 		panel_2.add(rdbtnCx);
 		
-		rdbtnDados = new JRadioButton("Dados");
-		rdbtnDados.addItemListener(new ItemListener() {
+		rdbtnPdh = new JRadioButton("PDH");
+		rdbtnPdh.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				if(rdbtnDados.isSelected()){
+
+				
+				if(rdbtnPdh.isSelected()){
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnSDH.setSelected(false);
+					rdbtnMux.setSelected(false);
 					rdbtnCx.setSelected(false);
-					rdbtnTx.setSelected(false);
-					String status = "DADOS";	
+					rdbtnDwdm.setSelected(false);
+					
+					String status = "PDH";	
 					ResultSet rs = null;
 					comboBoxModelo.removeAllItems();
 					
@@ -377,7 +412,7 @@ public class TelaMostraPlacas extends JFrame {
 						ConectaBanco conecta = new ConectaBanco();
 						conecta.conectaBanco();
 						
-						String buscaModeloPlaca = "select * from modeloplaca where statusModelo='"+status+"'";
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
 						rs = conecta.stm.executeQuery(buscaModeloPlaca);
 						
 						while(rs.next()){
@@ -394,15 +429,231 @@ public class TelaMostraPlacas extends JFrame {
 				}
 			}
 		});
-		rdbtnDados.setBounds(75, 20, 82, 25);
-		panel_2.add(rdbtnDados);
+		rdbtnPdh.setBounds(100, 20, 68, 25);
+		panel_2.add(rdbtnPdh);
+		
+		rdbtnMux = new JRadioButton("MUX");
+		rdbtnMux.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {				
+				
+				if(rdbtnMux.isSelected()){
+					
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnSDH.setSelected(false);
+					rdbtnPdh.setSelected(false);
+					rdbtnCx.setSelected(false);
+					rdbtnDwdm.setSelected(false);
+					
+					String status = "MUX";	
+					ResultSet rs = null;
+					comboBoxModelo.removeAllItems();
+					
+					try{
+						ConectaBanco conecta = new ConectaBanco();
+						conecta.conectaBanco();
+						
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
+						rs = conecta.stm.executeQuery(buscaModeloPlaca);
+						
+						while(rs.next()){
+							comboBoxModelo.addItem(rs.getString("partNumberModelo"));
+						}							
+						
+					}catch(SQLException ev){
+						
+					}					
+					
+				}//Fim do primeiro if
+				else{
+					comboBoxModelo.removeAllItems();
+				}
+			}
+		});
+		rdbtnMux.setBounds(208, 20, 82, 25);
+		panel_2.add(rdbtnMux);
+		
+		rdbtnDslamHuawei = new JRadioButton("DSLAM Huawei");
+		rdbtnDslamHuawei.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+
+				
+				if(rdbtnDslamHuawei.isSelected()){
+					
+					//Desmarcar os outros RadioButton
+					rdbtnPdh.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnSDH.setSelected(false);
+					rdbtnMux.setSelected(false);
+					rdbtnCx.setSelected(false);
+					rdbtnDwdm.setSelected(false);
+					
+					String status = "HUAWEI";	
+					ResultSet rs = null;
+					comboBoxModelo.removeAllItems();
+					
+					try{
+						ConectaBanco conecta = new ConectaBanco();
+						conecta.conectaBanco();
+						
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
+						rs = conecta.stm.executeQuery(buscaModeloPlaca);
+						
+						while(rs.next()){
+							comboBoxModelo.addItem(rs.getString("partNumberModelo"));
+						}							
+						
+					}catch(SQLException ev){
+						
+					}					
+					
+				}//Fim do primeiro if
+				else{
+					comboBoxModelo.removeAllItems();
+				}
+			}
+		});
+		rdbtnDslamHuawei.setBounds(100, 50, 141, 25);
+		panel_2.add(rdbtnDslamHuawei);
+		
+		rdbtnDslamNec = new JRadioButton("DSLAM Nec");
+		rdbtnDslamNec.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				if(rdbtnDslamNec.isSelected()){
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnPdh.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnSDH.setSelected(false);
+					rdbtnMux.setSelected(false);
+					rdbtnCx.setSelected(false);
+					rdbtnDwdm.setSelected(false);
+					
+					String status = "NEC";	
+					ResultSet rs = null;
+					comboBoxModelo.removeAllItems();
+					
+					try{
+						ConectaBanco conecta = new ConectaBanco();
+						conecta.conectaBanco();
+						
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
+						rs = conecta.stm.executeQuery(buscaModeloPlaca);
+						
+						while(rs.next()){
+							comboBoxModelo.addItem(rs.getString("partNumberModelo"));
+						}							
+						
+					}catch(SQLException ev){
+						
+					}					
+					
+				}//Fim do primeiro if
+				else{
+					comboBoxModelo.removeAllItems();
+				}
+			}
+		});
+		rdbtnDslamNec.setBounds(257, 50, 127, 25);
+		panel_2.add(rdbtnDslamNec);
+		
+		rdbtnDslamZte = new JRadioButton("DSLAM ZTE");
+		rdbtnDslamZte.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				
+				if(rdbtnDslamZte.isSelected()){
+					
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnPdh.setSelected(false);
+					rdbtnSDH.setSelected(false);
+					rdbtnMux.setSelected(false);
+					rdbtnCx.setSelected(false);
+					rdbtnDwdm.setSelected(false);
+					
+					String status = "ZTE";	
+					ResultSet rs = null;
+					comboBoxModelo.removeAllItems();
+					
+					try{
+						ConectaBanco conecta = new ConectaBanco();
+						conecta.conectaBanco();
+						
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
+						rs = conecta.stm.executeQuery(buscaModeloPlaca);
+						
+						while(rs.next()){
+							comboBoxModelo.addItem(rs.getString("partNumberModelo"));
+						}							
+						
+					}catch(SQLException ev){
+						
+					}					
+					
+				}//Fim do primeiro if
+				else{
+					comboBoxModelo.removeAllItems();
+				}
+			}
+		});
+		rdbtnDslamZte.setBounds(306, 20, 127, 25);
+		panel_2.add(rdbtnDslamZte);
+		
+		rdbtnDwdm = new JRadioButton("DWDM");
+		rdbtnDwdm.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+
+				
+				if(rdbtnDwdm.isSelected()){
+					
+					//Desmarcar os outros RadioButton
+					rdbtnDslamHuawei.setSelected(false);
+					rdbtnDslamNec.setSelected(false);
+					rdbtnDslamZte.setSelected(false);
+					rdbtnSDH.setSelected(false);
+					rdbtnMux.setSelected(false);
+					rdbtnCx.setSelected(false);
+					rdbtnPdh.setSelected(false);
+					
+					String status = "DWDM";	
+					ResultSet rs = null;
+					comboBoxModelo.removeAllItems();
+					
+					try{
+						ConectaBanco conecta = new ConectaBanco();
+						conecta.conectaBanco();
+						
+						String buscaModeloPlaca = "select * from modeloplaca where tecnicaModelo='"+status+"'";
+						rs = conecta.stm.executeQuery(buscaModeloPlaca);
+						
+						while(rs.next()){
+							comboBoxModelo.addItem(rs.getString("partNumberModelo"));
+						}							
+						
+					}catch(SQLException ev){
+						
+					}					
+					
+				}//Fim do primeiro if
+				else{
+					comboBoxModelo.removeAllItems();
+				}
+			}
+		});
+		rdbtnDwdm.setBounds(393, 50, 93, 25);
+		panel_2.add(rdbtnDwdm);
 		
 		comboBoxModelo = new JComboBox();
-		comboBoxModelo.setBounds(218, 124, 172, 22);
+		comboBoxModelo.setBounds(20, 222, 172, 22);
 		panel.add(comboBoxModelo);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 263, 630, 147);
+		scrollPane.setBounds(12, 357, 630, 147);
 		panel.add(scrollPane);
 		
 		table = new JTable();
@@ -510,15 +761,15 @@ public class TelaMostraPlacas extends JFrame {
 		});
 		button.setToolTipText("Pesquisar");
 		button.setIcon(new ImageIcon(TelaMostraPlacas.class.getResource("/imagens/mltech/Pesquisar.png")));
-		button.setBounds(426, 105, 92, 41);
+		button.setBounds(223, 203, 92, 41);
 		panel.add(button);
 		
 		JLabel lblPesquisarPorSerial = new JLabel("Pesquisar Por Serial:");
-		lblPesquisarPorSerial.setBounds(218, 193, 157, 16);
+		lblPesquisarPorSerial.setBounds(20, 269, 157, 16);
 		panel.add(lblPesquisarPorSerial);
 		
 		textFieldSerial = new JTextField();
-		textFieldSerial.setBounds(218, 218, 172, 22);
+		textFieldSerial.setBounds(20, 298, 172, 22);
 		panel.add(textFieldSerial);
 		textFieldSerial.setColumns(10);
 		
@@ -535,7 +786,7 @@ public class TelaMostraPlacas extends JFrame {
 			}
 		});
 		button_1.setIcon(new ImageIcon(TelaMostraPlacas.class.getResource("/imagens/mltech/Pesquisar.png")));
-		button_1.setBounds(426, 199, 97, 41);
+		button_1.setBounds(218, 279, 97, 41);
 		panel.add(button_1);
 	}
 }

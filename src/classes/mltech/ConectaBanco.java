@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class ConectaBanco {
 	
 	public Connection con;
-	public static Statement stm;	
+	public static Statement stm;		
 	
 	public void conectaBanco() throws SQLException {
 		
